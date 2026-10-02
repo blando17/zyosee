@@ -64,7 +64,7 @@ This separation prevents CPU-heavy or potentially unsafe submitted programs from
 | 📦 Problem Management | MongoDB-backed problem management |
 | 🔄 Redis Fallback | In-memory fallback when Redis is unavailable |
 
----
+
 ---
 
 ## 🌐 Deployment
