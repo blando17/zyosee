@@ -140,6 +140,42 @@ image and deploys it on its own. Skip this and everything still works — you
 press **Manual Deploy** in Render after a build instead, and the workflow says
 so in its log rather than failing.
 
+## Authoring problems on this deployment
+
+Admin is an e-mail allowlist, not a role: you sign up like anyone else, and you
+are an administrator if your address is in `ADMIN_EMAILS` on `zyosee-api`. Set
+it there and sign up with that exact address. Leave it unset and nobody is one,
+which the API says in those words rather than returning a bare 403.
+
+**Creating a problem through the admin UI does not fully work on Render, and it
+fails quietly.** This is worth reading before you author anything.
+
+A problem is two things: a document in MongoDB, and a pair of files per test on
+disk. The API writes the files (`backend/services/testStore.js`) and the judge
+reads them (`compiler/testStore.js`). Under `deploy/docker-compose.prod.yml`
+both containers mount the same host directory, so they are looking at the same
+files and this works.
+
+On Render they are two separate services on two separate machines. The API will
+write test files to its own disk, report success, and save the document to
+Atlas — and the judge will never see those files. The problem then appears in
+the list and fails every submission with a missing-file error. Render's
+filesystem is also ephemeral, so the API's copy does not survive its next
+restart either.
+
+So on this deployment, add problems the way the repository does:
+
+1. Create the problem locally, where the API and judge share `compiler/testdata`
+2. Commit the new files under `deploy/testdata/`
+3. Push — Actions rebuilds the image with them and Render pulls it
+
+Slower than a web form, and durable, which the web form is not.
+
+The real fix is to stop keeping test files on a filesystem at all and store them
+alongside the problems in MongoDB, which would make authoring work on any host
+and remove the 122 MB from the image. That is a change to both testStore.js
+files, not a configuration setting.
+
 ## Check it
 
 Both of these should answer JSON:
