@@ -65,7 +65,13 @@ const BANDS = [
     eyebrow: "The problem set",
     title: "Problems",
     blurb:
-      "Hundreds of problems across the usual data structures and algorithms. Submit, and the judge runs your code against every hidden test and answers with a verdict.",
+      // Deliberately no count. This said "hundreds" while the set was 473 and
+      // was still saying it at 73, which is the failure mode of writing a
+      // number into prose: nobody remembers the sentence exists when the number
+      // moves. The live figure is three inches up the page in the statistics
+      // band, read from the database on every load, so this says what the
+      // problems ARE and lets that say how many.
+      "Curated problems across the usual data structures and algorithms. Submit, and the judge runs your code against every hidden test and answers with a verdict.",
     points: [
       "Easy through Hard, with the topics on every problem",
       "Every submission runs against every test, not a sample",
