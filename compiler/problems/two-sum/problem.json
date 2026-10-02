@@ -1,0 +1,30 @@
+{
+  "slug": "two-sum",
+  "title": "Two Sum",
+  "difficulty": "Easy",
+  "tags": [
+    "array",
+    "hash map"
+  ],
+  "timeLimitMs": 2000,
+  "sampleCount": 2,
+  "statement": "You are given an array of n integers and a target value. Exactly one pair of distinct positions in the array adds up to the target. Print the two positions.\n\nPositions are 0-based. Print the smaller position first.",
+  "inputFormat": "Line 1: the integer n, the length of the array.\nLine 2: n integers, the array.\nLine 3: the integer target.",
+  "outputFormat": "One line holding the two 0-based positions, smaller first, separated by a single space.",
+  "constraints": [
+    "2 <= n <= 200000",
+    "-1000000000 <= each value <= 1000000000",
+    "Exactly one pair of positions adds up to the target"
+  ],
+  "sampleNotes": [
+    "The values at positions 0 and 1 are 2 and 7, and 2 + 7 is 9.",
+    "The values at positions 1 and 2 are 2 and 4, and 2 + 4 is 6. Position 0 is not part of the answer."
+  ],
+  "hint": "The largest tests have n = 200000. Checking every pair is twenty billion comparisons and will not finish in time, in any language. One pass with a hash map from value to position will, because it looks at each element once.",
+  "starter": {
+    "cpp": "#include <iostream>\n#include <vector>\n#include <unordered_map>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    vector<long long> a(n);\n    for (int i = 0; i < n; i++) cin >> a[i];\n    long long target;\n    cin >> target;\n\n    // Your code here. Print the two 0-based positions, smaller first.\n\n    return 0;\n}\n",
+    "c": "#include <stdio.h>\n#include <stdlib.h>\n\nint main() {\n    int n;\n    scanf(\"%d\", &n);\n    long long *a = malloc(sizeof(long long) * n);\n    for (int i = 0; i < n; i++) scanf(\"%lld\", &a[i]);\n    long long target;\n    scanf(\"%lld\", &target);\n\n    /* Your code here. Print the two 0-based positions, smaller first. */\n\n    free(a);\n    return 0;\n}\n",
+    "py": "import sys\n\ndata = sys.stdin.read().split()\nn = int(data[0])\na = [int(x) for x in data[1:1 + n]]\ntarget = int(data[1 + n])\n\n# Your code here. Print the two 0-based positions, smaller first.\n",
+    "java": "import java.io.*;\nimport java.util.*;\n\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        StreamTokenizer in = new StreamTokenizer(new BufferedInputStream(System.in));\n        in.nextToken();\n        int n = (int) in.nval;\n        long[] a = new long[n];\n        for (int i = 0; i < n; i++) { in.nextToken(); a[i] = (long) in.nval; }\n        in.nextToken();\n        long target = (long) in.nval;\n\n        // Your code here. Print the two 0-based positions, smaller first.\n    }\n}\n"
+  }
+}

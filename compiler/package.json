@@ -1,0 +1,32 @@
+{
+  "name": "oj-compiler",
+  "version": "1.0.0",
+  "description": "Online Judge - compile and run service (no persistence)",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "docker:build": "docker compose build",
+    "docker:start": "docker compose up -d",
+    "docker:stop": "docker compose down",
+    "docker:logs": "docker compose logs -f compiler",
+    "docker:shell": "docker compose exec compiler bash",
+    "migrate": "node ../scripts/migrate-problems-to-mongo.js",
+    "redis:cli": "docker compose exec redis redis-cli",
+    "worker": "node worker.js",
+    "docker:scale": "docker compose up -d --scale worker=3"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.8.0",
+    "redis": "^6.2.1",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}

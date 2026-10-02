@@ -1,0 +1,2002 @@
+[
+ {
+  "id": "1068",
+  "title": "Weird Algorithm",
+  "cat": "Introductory Problems"
+ },
+ {
+  "id": "1083",
+  "title": "Missing Number",
+  "cat": "Introductory Problems"
+ },
+ {
+  "id": "1069",
+  "title": "Repetitions",
+  "cat": "Introductory Problems"
+ },
+ {
+  "id": "1094",
+  "title": "Increasing Array",
+  "cat": "Introductory Problems"
+ },
+ {
+  "id": "1070",
+  "title": "Permutations",
+  "cat": "Introductory Problems"
+ },
+ {
+  "id": "1071",
+  "title": "Number Spiral",
+  "cat": "Introductory Problems"
+ },
+ {
+  "id": "1072",
+  "title": "Two Knights",
+  "cat": "Introductory Problems"
+ },
+ {
+  "id": "1092",
+  "title": "Two Sets",
+  "cat": "Introductory Problems"
+ },
+ {
+  "id": "1617",
+  "title": "Bit Strings",
+  "cat": "Introductory Problems"
+ },
+ {
+  "id": "1618",
+  "title": "Trailing Zeros",
+  "cat": "Introductory Problems"
+ },
+ {
+  "id": "1754",
+  "title": "Coin Piles",
+  "cat": "Introductory Problems"
+ },
+ {
+  "id": "1755",
+  "title": "Palindrome Reorder",
+  "cat": "Introductory Problems"
+ },
+ {
+  "id": "2205",
+  "title": "Gray Code",
+  "cat": "Introductory Problems"
+ },
+ {
+  "id": "2165",
+  "title": "Tower of Hanoi",
+  "cat": "Introductory Problems"
+ },
+ {
+  "id": "1622",
+  "title": "Creating Strings",
+  "cat": "Introductory Problems"
+ },
+ {
+  "id": "1623",
+  "title": "Apple Division",
+  "cat": "Introductory Problems"
+ },
+ {
+  "id": "1624",
+  "title": "Chessboard and Queens",
+  "cat": "Introductory Problems"
+ },
+ {
+  "id": "3399",
+  "title": "Raab Game I",
+  "cat": "Introductory Problems"
+ },
+ {
+  "id": "3419",
+  "title": "Mex Grid Construction",
+  "cat": "Introductory Problems"
+ },
+ {
+  "id": "3217",
+  "title": "Knight Moves Grid",
+  "cat": "Introductory Problems"
+ },
+ {
+  "id": "3311",
+  "title": "Grid Coloring I",
+  "cat": "Introductory Problems"
+ },
+ {
+  "id": "2431",
+  "title": "Digit Queries",
+  "cat": "Introductory Problems"
+ },
+ {
+  "id": "1743",
+  "title": "String Reorder",
+  "cat": "Introductory Problems"
+ },
+ {
+  "id": "1625",
+  "title": "Grid Path Description",
+  "cat": "Introductory Problems"
+ },
+ {
+  "id": "1621",
+  "title": "Distinct Numbers",
+  "cat": "Sorting and Searching"
+ },
+ {
+  "id": "1084",
+  "title": "Apartments",
+  "cat": "Sorting and Searching"
+ },
+ {
+  "id": "1090",
+  "title": "Ferris Wheel",
+  "cat": "Sorting and Searching"
+ },
+ {
+  "id": "1091",
+  "title": "Concert Tickets",
+  "cat": "Sorting and Searching"
+ },
+ {
+  "id": "1619",
+  "title": "Restaurant Customers",
+  "cat": "Sorting and Searching"
+ },
+ {
+  "id": "1629",
+  "title": "Movie Festival",
+  "cat": "Sorting and Searching"
+ },
+ {
+  "id": "1640",
+  "title": "Sum of Two Values",
+  "cat": "Sorting and Searching"
+ },
+ {
+  "id": "1643",
+  "title": "Maximum Subarray Sum",
+  "cat": "Sorting and Searching"
+ },
+ {
+  "id": "1074",
+  "title": "Stick Lengths",
+  "cat": "Sorting and Searching"
+ },
+ {
+  "id": "2183",
+  "title": "Missing Coin Sum",
+  "cat": "Sorting and Searching"
+ },
+ {
+  "id": "2216",
+  "title": "Collecting Numbers",
+  "cat": "Sorting and Searching"
+ },
+ {
+  "id": "2217",
+  "title": "Collecting Numbers II",
+  "cat": "Sorting and Searching"
+ },
+ {
+  "id": "1141",
+  "title": "Playlist",
+  "cat": "Sorting and Searching"
+ },
+ {
+  "id": "1073",
+  "title": "Towers",
+  "cat": "Sorting and Searching"
+ },
+ {
+  "id": "1163",
+  "title": "Traffic Lights",
+  "cat": "Sorting and Searching"
+ },
+ {
+  "id": "3420",
+  "title": "Distinct Values Subarrays",
+  "cat": "Sorting and Searching"
+ },
+ {
+  "id": "3421",
+  "title": "Distinct Values Subsequences",
+  "cat": "Sorting and Searching"
+ },
+ {
+  "id": "2162",
+  "title": "Josephus Problem I",
+  "cat": "Sorting and Searching"
+ },
+ {
+  "id": "2163",
+  "title": "Josephus Problem II",
+  "cat": "Sorting and Searching"
+ },
+ {
+  "id": "2168",
+  "title": "Nested Ranges Check",
+  "cat": "Sorting and Searching"
+ },
+ {
+  "id": "2169",
+  "title": "Nested Ranges Count",
+  "cat": "Sorting and Searching"
+ },
+ {
+  "id": "1164",
+  "title": "Room Allocation",
+  "cat": "Sorting and Searching"
+ },
+ {
+  "id": "1620",
+  "title": "Factory Machines",
+  "cat": "Sorting and Searching"
+ },
+ {
+  "id": "1630",
+  "title": "Tasks and Deadlines",
+  "cat": "Sorting and Searching"
+ },
+ {
+  "id": "1631",
+  "title": "Reading Books",
+  "cat": "Sorting and Searching"
+ },
+ {
+  "id": "1641",
+  "title": "Sum of Three Values",
+  "cat": "Sorting and Searching"
+ },
+ {
+  "id": "1642",
+  "title": "Sum of Four Values",
+  "cat": "Sorting and Searching"
+ },
+ {
+  "id": "1645",
+  "title": "Nearest Smaller Values",
+  "cat": "Sorting and Searching"
+ },
+ {
+  "id": "1660",
+  "title": "Subarray Sums I",
+  "cat": "Sorting and Searching"
+ },
+ {
+  "id": "1661",
+  "title": "Subarray Sums II",
+  "cat": "Sorting and Searching"
+ },
+ {
+  "id": "1662",
+  "title": "Subarray Divisibility",
+  "cat": "Sorting and Searching"
+ },
+ {
+  "id": "2428",
+  "title": "Distinct Values Subarrays II",
+  "cat": "Sorting and Searching"
+ },
+ {
+  "id": "1085",
+  "title": "Array Division",
+  "cat": "Sorting and Searching"
+ },
+ {
+  "id": "1632",
+  "title": "Movie Festival II",
+  "cat": "Sorting and Searching"
+ },
+ {
+  "id": "1644",
+  "title": "Maximum Subarray Sum II",
+  "cat": "Sorting and Searching"
+ },
+ {
+  "id": "1633",
+  "title": "Dice Combinations",
+  "cat": "Dynamic Programming"
+ },
+ {
+  "id": "1634",
+  "title": "Minimizing Coins",
+  "cat": "Dynamic Programming"
+ },
+ {
+  "id": "1635",
+  "title": "Coin Combinations I",
+  "cat": "Dynamic Programming"
+ },
+ {
+  "id": "1636",
+  "title": "Coin Combinations II",
+  "cat": "Dynamic Programming"
+ },
+ {
+  "id": "1637",
+  "title": "Removing Digits",
+  "cat": "Dynamic Programming"
+ },
+ {
+  "id": "1638",
+  "title": "Grid Paths I",
+  "cat": "Dynamic Programming"
+ },
+ {
+  "id": "1158",
+  "title": "Book Shop",
+  "cat": "Dynamic Programming"
+ },
+ {
+  "id": "1746",
+  "title": "Array Description",
+  "cat": "Dynamic Programming"
+ },
+ {
+  "id": "2413",
+  "title": "Counting Towers",
+  "cat": "Dynamic Programming"
+ },
+ {
+  "id": "1639",
+  "title": "Edit Distance",
+  "cat": "Dynamic Programming"
+ },
+ {
+  "id": "3403",
+  "title": "Longest Common Subsequence",
+  "cat": "Dynamic Programming"
+ },
+ {
+  "id": "1744",
+  "title": "Rectangle Cutting",
+  "cat": "Dynamic Programming"
+ },
+ {
+  "id": "3359",
+  "title": "Minimal Grid Path",
+  "cat": "Dynamic Programming"
+ },
+ {
+  "id": "1745",
+  "title": "Money Sums",
+  "cat": "Dynamic Programming"
+ },
+ {
+  "id": "1097",
+  "title": "Removal Game",
+  "cat": "Dynamic Programming"
+ },
+ {
+  "id": "1093",
+  "title": "Two Sets II",
+  "cat": "Dynamic Programming"
+ },
+ {
+  "id": "3314",
+  "title": "Mountain Range",
+  "cat": "Dynamic Programming"
+ },
+ {
+  "id": "1145",
+  "title": "Increasing Subsequence",
+  "cat": "Dynamic Programming"
+ },
+ {
+  "id": "1140",
+  "title": "Projects",
+  "cat": "Dynamic Programming"
+ },
+ {
+  "id": "1653",
+  "title": "Elevator Rides",
+  "cat": "Dynamic Programming"
+ },
+ {
+  "id": "2181",
+  "title": "Counting Tilings",
+  "cat": "Dynamic Programming"
+ },
+ {
+  "id": "2220",
+  "title": "Counting Numbers",
+  "cat": "Dynamic Programming"
+ },
+ {
+  "id": "1748",
+  "title": "Increasing Subsequence II",
+  "cat": "Dynamic Programming"
+ },
+ {
+  "id": "1192",
+  "title": "Counting Rooms",
+  "cat": "Graph Algorithms"
+ },
+ {
+  "id": "1193",
+  "title": "Labyrinth",
+  "cat": "Graph Algorithms"
+ },
+ {
+  "id": "1666",
+  "title": "Building Roads",
+  "cat": "Graph Algorithms"
+ },
+ {
+  "id": "1667",
+  "title": "Message Route",
+  "cat": "Graph Algorithms"
+ },
+ {
+  "id": "1668",
+  "title": "Building Teams",
+  "cat": "Graph Algorithms"
+ },
+ {
+  "id": "1669",
+  "title": "Round Trip",
+  "cat": "Graph Algorithms"
+ },
+ {
+  "id": "1194",
+  "title": "Monsters",
+  "cat": "Graph Algorithms"
+ },
+ {
+  "id": "1671",
+  "title": "Shortest Routes I",
+  "cat": "Graph Algorithms"
+ },
+ {
+  "id": "1672",
+  "title": "Shortest Routes II",
+  "cat": "Graph Algorithms"
+ },
+ {
+  "id": "1673",
+  "title": "High Score",
+  "cat": "Graph Algorithms"
+ },
+ {
+  "id": "1195",
+  "title": "Flight Discount",
+  "cat": "Graph Algorithms"
+ },
+ {
+  "id": "1197",
+  "title": "Cycle Finding",
+  "cat": "Graph Algorithms"
+ },
+ {
+  "id": "1196",
+  "title": "Flight Routes",
+  "cat": "Graph Algorithms"
+ },
+ {
+  "id": "1678",
+  "title": "Round Trip II",
+  "cat": "Graph Algorithms"
+ },
+ {
+  "id": "1679",
+  "title": "Course Schedule",
+  "cat": "Graph Algorithms"
+ },
+ {
+  "id": "1680",
+  "title": "Longest Flight Route",
+  "cat": "Graph Algorithms"
+ },
+ {
+  "id": "1681",
+  "title": "Game Routes",
+  "cat": "Graph Algorithms"
+ },
+ {
+  "id": "1202",
+  "title": "Investigation",
+  "cat": "Graph Algorithms"
+ },
+ {
+  "id": "1750",
+  "title": "Planets Queries I",
+  "cat": "Graph Algorithms"
+ },
+ {
+  "id": "1160",
+  "title": "Planets Queries II",
+  "cat": "Graph Algorithms"
+ },
+ {
+  "id": "1751",
+  "title": "Planets Cycles",
+  "cat": "Graph Algorithms"
+ },
+ {
+  "id": "1675",
+  "title": "Road Reparation",
+  "cat": "Graph Algorithms"
+ },
+ {
+  "id": "1676",
+  "title": "Road Construction",
+  "cat": "Graph Algorithms"
+ },
+ {
+  "id": "1682",
+  "title": "Flight Routes Check",
+  "cat": "Graph Algorithms"
+ },
+ {
+  "id": "1683",
+  "title": "Planets and Kingdoms",
+  "cat": "Graph Algorithms"
+ },
+ {
+  "id": "1684",
+  "title": "Giant Pizza",
+  "cat": "Graph Algorithms"
+ },
+ {
+  "id": "1686",
+  "title": "Coin Collector",
+  "cat": "Graph Algorithms"
+ },
+ {
+  "id": "1691",
+  "title": "Mail Delivery",
+  "cat": "Graph Algorithms"
+ },
+ {
+  "id": "1692",
+  "title": "De Bruijn Sequence",
+  "cat": "Graph Algorithms"
+ },
+ {
+  "id": "1693",
+  "title": "Teleporters Path",
+  "cat": "Graph Algorithms"
+ },
+ {
+  "id": "1690",
+  "title": "Hamiltonian Flights",
+  "cat": "Graph Algorithms"
+ },
+ {
+  "id": "1689",
+  "title": "Knight's Tour",
+  "cat": "Graph Algorithms"
+ },
+ {
+  "id": "1694",
+  "title": "Download Speed",
+  "cat": "Graph Algorithms"
+ },
+ {
+  "id": "1695",
+  "title": "Police Chase",
+  "cat": "Graph Algorithms"
+ },
+ {
+  "id": "1696",
+  "title": "School Dance",
+  "cat": "Graph Algorithms"
+ },
+ {
+  "id": "1711",
+  "title": "Distinct Routes",
+  "cat": "Graph Algorithms"
+ },
+ {
+  "id": "1646",
+  "title": "Static Range Sum Queries",
+  "cat": "Range Queries"
+ },
+ {
+  "id": "1647",
+  "title": "Static Range Minimum Queries",
+  "cat": "Range Queries"
+ },
+ {
+  "id": "1648",
+  "title": "Dynamic Range Sum Queries",
+  "cat": "Range Queries"
+ },
+ {
+  "id": "1649",
+  "title": "Dynamic Range Minimum Queries",
+  "cat": "Range Queries"
+ },
+ {
+  "id": "1650",
+  "title": "Range Xor Queries",
+  "cat": "Range Queries"
+ },
+ {
+  "id": "1651",
+  "title": "Range Update Queries",
+  "cat": "Range Queries"
+ },
+ {
+  "id": "1652",
+  "title": "Forest Queries",
+  "cat": "Range Queries"
+ },
+ {
+  "id": "1143",
+  "title": "Hotel Queries",
+  "cat": "Range Queries"
+ },
+ {
+  "id": "1749",
+  "title": "List Removals",
+  "cat": "Range Queries"
+ },
+ {
+  "id": "1144",
+  "title": "Salary Queries",
+  "cat": "Range Queries"
+ },
+ {
+  "id": "2166",
+  "title": "Prefix Sum Queries",
+  "cat": "Range Queries"
+ },
+ {
+  "id": "2206",
+  "title": "Pizzeria Queries",
+  "cat": "Range Queries"
+ },
+ {
+  "id": "3304",
+  "title": "Visible Buildings Queries",
+  "cat": "Range Queries"
+ },
+ {
+  "id": "3163",
+  "title": "Range Interval Queries",
+  "cat": "Range Queries"
+ },
+ {
+  "id": "1190",
+  "title": "Subarray Sum Queries",
+  "cat": "Range Queries"
+ },
+ {
+  "id": "3226",
+  "title": "Subarray Sum Queries II",
+  "cat": "Range Queries"
+ },
+ {
+  "id": "1734",
+  "title": "Distinct Values Queries",
+  "cat": "Range Queries"
+ },
+ {
+  "id": "3356",
+  "title": "Distinct Values Queries II",
+  "cat": "Range Queries"
+ },
+ {
+  "id": "2416",
+  "title": "Increasing Array Queries",
+  "cat": "Range Queries"
+ },
+ {
+  "id": "1664",
+  "title": "Movie Festival Queries",
+  "cat": "Range Queries"
+ },
+ {
+  "id": "1739",
+  "title": "Forest Queries II",
+  "cat": "Range Queries"
+ },
+ {
+  "id": "1735",
+  "title": "Range Updates and Sums",
+  "cat": "Range Queries"
+ },
+ {
+  "id": "1736",
+  "title": "Polynomial Queries",
+  "cat": "Range Queries"
+ },
+ {
+  "id": "1737",
+  "title": "Range Queries and Copies",
+  "cat": "Range Queries"
+ },
+ {
+  "id": "2184",
+  "title": "Missing Coin Sum Queries",
+  "cat": "Range Queries"
+ },
+ {
+  "id": "1674",
+  "title": "Subordinates",
+  "cat": "Tree Algorithms"
+ },
+ {
+  "id": "1130",
+  "title": "Tree Matching",
+  "cat": "Tree Algorithms"
+ },
+ {
+  "id": "1131",
+  "title": "Tree Diameter",
+  "cat": "Tree Algorithms"
+ },
+ {
+  "id": "1132",
+  "title": "Tree Distances I",
+  "cat": "Tree Algorithms"
+ },
+ {
+  "id": "1133",
+  "title": "Tree Distances II",
+  "cat": "Tree Algorithms"
+ },
+ {
+  "id": "1687",
+  "title": "Company Queries I",
+  "cat": "Tree Algorithms"
+ },
+ {
+  "id": "1688",
+  "title": "Company Queries II",
+  "cat": "Tree Algorithms"
+ },
+ {
+  "id": "1135",
+  "title": "Distance Queries",
+  "cat": "Tree Algorithms"
+ },
+ {
+  "id": "1136",
+  "title": "Counting Paths",
+  "cat": "Tree Algorithms"
+ },
+ {
+  "id": "1137",
+  "title": "Subtree Queries",
+  "cat": "Tree Algorithms"
+ },
+ {
+  "id": "1138",
+  "title": "Path Queries",
+  "cat": "Tree Algorithms"
+ },
+ {
+  "id": "2134",
+  "title": "Path Queries II",
+  "cat": "Tree Algorithms"
+ },
+ {
+  "id": "1139",
+  "title": "Distinct Colors",
+  "cat": "Tree Algorithms"
+ },
+ {
+  "id": "2079",
+  "title": "Finding a Centroid",
+  "cat": "Tree Algorithms"
+ },
+ {
+  "id": "2080",
+  "title": "Fixed-Length Paths I",
+  "cat": "Tree Algorithms"
+ },
+ {
+  "id": "2081",
+  "title": "Fixed-Length Paths II",
+  "cat": "Tree Algorithms"
+ },
+ {
+  "id": "2164",
+  "title": "Josephus Queries",
+  "cat": "Mathematics"
+ },
+ {
+  "id": "1095",
+  "title": "Exponentiation",
+  "cat": "Mathematics"
+ },
+ {
+  "id": "1712",
+  "title": "Exponentiation II",
+  "cat": "Mathematics"
+ },
+ {
+  "id": "1713",
+  "title": "Counting Divisors",
+  "cat": "Mathematics"
+ },
+ {
+  "id": "1081",
+  "title": "Common Divisors",
+  "cat": "Mathematics"
+ },
+ {
+  "id": "1082",
+  "title": "Sum of Divisors",
+  "cat": "Mathematics"
+ },
+ {
+  "id": "2182",
+  "title": "Divisor Analysis",
+  "cat": "Mathematics"
+ },
+ {
+  "id": "2185",
+  "title": "Prime Multiples",
+  "cat": "Mathematics"
+ },
+ {
+  "id": "2417",
+  "title": "Counting Coprime Pairs",
+  "cat": "Mathematics"
+ },
+ {
+  "id": "3396",
+  "title": "Next Prime",
+  "cat": "Mathematics"
+ },
+ {
+  "id": "1079",
+  "title": "Binomial Coefficients",
+  "cat": "Mathematics"
+ },
+ {
+  "id": "1715",
+  "title": "Creating Strings II",
+  "cat": "Mathematics"
+ },
+ {
+  "id": "1716",
+  "title": "Distributing Apples",
+  "cat": "Mathematics"
+ },
+ {
+  "id": "1717",
+  "title": "Christmas Party",
+  "cat": "Mathematics"
+ },
+ {
+  "id": "3397",
+  "title": "Permutation Order",
+  "cat": "Mathematics"
+ },
+ {
+  "id": "3398",
+  "title": "Permutation Rounds",
+  "cat": "Mathematics"
+ },
+ {
+  "id": "2064",
+  "title": "Bracket Sequences I",
+  "cat": "Mathematics"
+ },
+ {
+  "id": "2187",
+  "title": "Bracket Sequences II",
+  "cat": "Mathematics"
+ },
+ {
+  "id": "2209",
+  "title": "Counting Necklaces",
+  "cat": "Mathematics"
+ },
+ {
+  "id": "2210",
+  "title": "Counting Grids",
+  "cat": "Mathematics"
+ },
+ {
+  "id": "1722",
+  "title": "Fibonacci Numbers",
+  "cat": "Mathematics"
+ },
+ {
+  "id": "1096",
+  "title": "Throwing Dice",
+  "cat": "Mathematics"
+ },
+ {
+  "id": "1723",
+  "title": "Graph Paths I",
+  "cat": "Mathematics"
+ },
+ {
+  "id": "1724",
+  "title": "Graph Paths II",
+  "cat": "Mathematics"
+ },
+ {
+  "id": "3154",
+  "title": "System of Linear Equations",
+  "cat": "Mathematics"
+ },
+ {
+  "id": "3355",
+  "title": "Sum of Four Squares",
+  "cat": "Mathematics"
+ },
+ {
+  "id": "3406",
+  "title": "Triangle Number Sums",
+  "cat": "Mathematics"
+ },
+ {
+  "id": "1725",
+  "title": "Dice Probability",
+  "cat": "Mathematics"
+ },
+ {
+  "id": "1726",
+  "title": "Moving Robots",
+  "cat": "Mathematics"
+ },
+ {
+  "id": "1727",
+  "title": "Candy Lottery",
+  "cat": "Mathematics"
+ },
+ {
+  "id": "1728",
+  "title": "Inversion Probability",
+  "cat": "Mathematics"
+ },
+ {
+  "id": "1729",
+  "title": "Stick Game",
+  "cat": "Mathematics"
+ },
+ {
+  "id": "1730",
+  "title": "Nim Game I",
+  "cat": "Mathematics"
+ },
+ {
+  "id": "1098",
+  "title": "Nim Game II",
+  "cat": "Mathematics"
+ },
+ {
+  "id": "1099",
+  "title": "Stair Game",
+  "cat": "Mathematics"
+ },
+ {
+  "id": "2207",
+  "title": "Grundy's Game",
+  "cat": "Mathematics"
+ },
+ {
+  "id": "2208",
+  "title": "Another Game",
+  "cat": "Mathematics"
+ },
+ {
+  "id": "1731",
+  "title": "Word Combinations",
+  "cat": "String Algorithms"
+ },
+ {
+  "id": "1753",
+  "title": "String Matching",
+  "cat": "String Algorithms"
+ },
+ {
+  "id": "1732",
+  "title": "Finding Borders",
+  "cat": "String Algorithms"
+ },
+ {
+  "id": "1733",
+  "title": "Finding Periods",
+  "cat": "String Algorithms"
+ },
+ {
+  "id": "1110",
+  "title": "Minimal Rotation",
+  "cat": "String Algorithms"
+ },
+ {
+  "id": "1111",
+  "title": "Longest Palindrome",
+  "cat": "String Algorithms"
+ },
+ {
+  "id": "3138",
+  "title": "All Palindromes",
+  "cat": "String Algorithms"
+ },
+ {
+  "id": "1112",
+  "title": "Required Substring",
+  "cat": "String Algorithms"
+ },
+ {
+  "id": "2420",
+  "title": "Palindrome Queries",
+  "cat": "String Algorithms"
+ },
+ {
+  "id": "2102",
+  "title": "Finding Patterns",
+  "cat": "String Algorithms"
+ },
+ {
+  "id": "2103",
+  "title": "Counting Patterns",
+  "cat": "String Algorithms"
+ },
+ {
+  "id": "2104",
+  "title": "Pattern Positions",
+  "cat": "String Algorithms"
+ },
+ {
+  "id": "2105",
+  "title": "Distinct Substrings",
+  "cat": "String Algorithms"
+ },
+ {
+  "id": "1149",
+  "title": "Distinct Subsequences",
+  "cat": "String Algorithms"
+ },
+ {
+  "id": "2106",
+  "title": "Repeating Substring",
+  "cat": "String Algorithms"
+ },
+ {
+  "id": "2107",
+  "title": "String Functions",
+  "cat": "String Algorithms"
+ },
+ {
+  "id": "3225",
+  "title": "Inverse Suffix Array",
+  "cat": "String Algorithms"
+ },
+ {
+  "id": "1113",
+  "title": "String Transform",
+  "cat": "String Algorithms"
+ },
+ {
+  "id": "2108",
+  "title": "Substring Order I",
+  "cat": "String Algorithms"
+ },
+ {
+  "id": "2109",
+  "title": "Substring Order II",
+  "cat": "String Algorithms"
+ },
+ {
+  "id": "2110",
+  "title": "Substring Distribution",
+  "cat": "String Algorithms"
+ },
+ {
+  "id": "2189",
+  "title": "Point Location Test",
+  "cat": "Geometry"
+ },
+ {
+  "id": "2190",
+  "title": "Line Segment Intersection",
+  "cat": "Geometry"
+ },
+ {
+  "id": "2191",
+  "title": "Polygon Area",
+  "cat": "Geometry"
+ },
+ {
+  "id": "2192",
+  "title": "Point in Polygon",
+  "cat": "Geometry"
+ },
+ {
+  "id": "2193",
+  "title": "Polygon Lattice Points",
+  "cat": "Geometry"
+ },
+ {
+  "id": "2194",
+  "title": "Minimum Euclidean Distance",
+  "cat": "Geometry"
+ },
+ {
+  "id": "2195",
+  "title": "Convex Hull",
+  "cat": "Geometry"
+ },
+ {
+  "id": "3410",
+  "title": "Maximum Manhattan Distances",
+  "cat": "Geometry"
+ },
+ {
+  "id": "3411",
+  "title": "All Manhattan Distances",
+  "cat": "Geometry"
+ },
+ {
+  "id": "1740",
+  "title": "Intersection Points",
+  "cat": "Geometry"
+ },
+ {
+  "id": "3427",
+  "title": "Line Segments Trace I",
+  "cat": "Geometry"
+ },
+ {
+  "id": "3428",
+  "title": "Line Segments Trace II",
+  "cat": "Geometry"
+ },
+ {
+  "id": "3429",
+  "title": "Lines and Queries I",
+  "cat": "Geometry"
+ },
+ {
+  "id": "3430",
+  "title": "Lines and Queries II",
+  "cat": "Geometry"
+ },
+ {
+  "id": "1741",
+  "title": "Area of Rectangles",
+  "cat": "Geometry"
+ },
+ {
+  "id": "1742",
+  "title": "Robot Path",
+  "cat": "Geometry"
+ },
+ {
+  "id": "1628",
+  "title": "Meet in the Middle",
+  "cat": "Advanced Techniques"
+ },
+ {
+  "id": "2136",
+  "title": "Hamming Distance",
+  "cat": "Advanced Techniques"
+ },
+ {
+  "id": "3360",
+  "title": "Corner Subgrid Check",
+  "cat": "Advanced Techniques"
+ },
+ {
+  "id": "2137",
+  "title": "Corner Subgrid Count",
+  "cat": "Advanced Techniques"
+ },
+ {
+  "id": "2138",
+  "title": "Reachable Nodes",
+  "cat": "Advanced Techniques"
+ },
+ {
+  "id": "2143",
+  "title": "Reachability Queries",
+  "cat": "Advanced Techniques"
+ },
+ {
+  "id": "2072",
+  "title": "Cut and Paste",
+  "cat": "Advanced Techniques"
+ },
+ {
+  "id": "2073",
+  "title": "Substring Reversals",
+  "cat": "Advanced Techniques"
+ },
+ {
+  "id": "2074",
+  "title": "Reversals and Sums",
+  "cat": "Advanced Techniques"
+ },
+ {
+  "id": "2076",
+  "title": "Necessary Roads",
+  "cat": "Advanced Techniques"
+ },
+ {
+  "id": "2077",
+  "title": "Necessary Cities",
+  "cat": "Advanced Techniques"
+ },
+ {
+  "id": "2078",
+  "title": "Eulerian Subgraphs",
+  "cat": "Advanced Techniques"
+ },
+ {
+  "id": "2084",
+  "title": "Monster Game I",
+  "cat": "Advanced Techniques"
+ },
+ {
+  "id": "2085",
+  "title": "Monster Game II",
+  "cat": "Advanced Techniques"
+ },
+ {
+  "id": "2086",
+  "title": "Subarray Squares",
+  "cat": "Advanced Techniques"
+ },
+ {
+  "id": "2087",
+  "title": "Houses and Schools",
+  "cat": "Advanced Techniques"
+ },
+ {
+  "id": "2088",
+  "title": "Knuth Division",
+  "cat": "Advanced Techniques"
+ },
+ {
+  "id": "2111",
+  "title": "Apples and Bananas",
+  "cat": "Advanced Techniques"
+ },
+ {
+  "id": "2112",
+  "title": "One Bit Positions",
+  "cat": "Advanced Techniques"
+ },
+ {
+  "id": "2113",
+  "title": "Signal Processing",
+  "cat": "Advanced Techniques"
+ },
+ {
+  "id": "2101",
+  "title": "New Roads Queries",
+  "cat": "Advanced Techniques"
+ },
+ {
+  "id": "2133",
+  "title": "Dynamic Connectivity",
+  "cat": "Advanced Techniques"
+ },
+ {
+  "id": "2121",
+  "title": "Parcel Delivery",
+  "cat": "Advanced Techniques"
+ },
+ {
+  "id": "2129",
+  "title": "Task Assignment",
+  "cat": "Advanced Techniques"
+ },
+ {
+  "id": "2130",
+  "title": "Distinct Routes II",
+  "cat": "Advanced Techniques"
+ },
+ {
+  "id": "3220",
+  "title": "Sliding Window Sum",
+  "cat": "Sliding Window Problems"
+ },
+ {
+  "id": "3221",
+  "title": "Sliding Window Minimum",
+  "cat": "Sliding Window Problems"
+ },
+ {
+  "id": "3426",
+  "title": "Sliding Window Xor",
+  "cat": "Sliding Window Problems"
+ },
+ {
+  "id": "3405",
+  "title": "Sliding Window Or",
+  "cat": "Sliding Window Problems"
+ },
+ {
+  "id": "3222",
+  "title": "Sliding Window Distinct Values",
+  "cat": "Sliding Window Problems"
+ },
+ {
+  "id": "3224",
+  "title": "Sliding Window Mode",
+  "cat": "Sliding Window Problems"
+ },
+ {
+  "id": "3219",
+  "title": "Sliding Window Mex",
+  "cat": "Sliding Window Problems"
+ },
+ {
+  "id": "1076",
+  "title": "Sliding Window Median",
+  "cat": "Sliding Window Problems"
+ },
+ {
+  "id": "1077",
+  "title": "Sliding Window Cost",
+  "cat": "Sliding Window Problems"
+ },
+ {
+  "id": "3223",
+  "title": "Sliding Window Inversions",
+  "cat": "Sliding Window Problems"
+ },
+ {
+  "id": "3227",
+  "title": "Sliding Window Advertisement",
+  "cat": "Sliding Window Problems"
+ },
+ {
+  "id": "3112",
+  "title": "Hidden Integer",
+  "cat": "Interactive Problems"
+ },
+ {
+  "id": "3139",
+  "title": "Hidden Permutation",
+  "cat": "Interactive Problems"
+ },
+ {
+  "id": "3305",
+  "title": "K-th Highest Score",
+  "cat": "Interactive Problems"
+ },
+ {
+  "id": "3228",
+  "title": "Permuted Binary Strings",
+  "cat": "Interactive Problems"
+ },
+ {
+  "id": "3273",
+  "title": "Colored Chairs",
+  "cat": "Interactive Problems"
+ },
+ {
+  "id": "3140",
+  "title": "Inversion Sorting",
+  "cat": "Interactive Problems"
+ },
+ {
+  "id": "1146",
+  "title": "Counting Bits",
+  "cat": "Bitwise Operations"
+ },
+ {
+  "id": "1655",
+  "title": "Maximum Xor Subarray",
+  "cat": "Bitwise Operations"
+ },
+ {
+  "id": "3191",
+  "title": "Maximum Xor Subset",
+  "cat": "Bitwise Operations"
+ },
+ {
+  "id": "3211",
+  "title": "Number of Subset Xors",
+  "cat": "Bitwise Operations"
+ },
+ {
+  "id": "3192",
+  "title": "K Subset Xors",
+  "cat": "Bitwise Operations"
+ },
+ {
+  "id": "3233",
+  "title": "All Subarray Xors",
+  "cat": "Bitwise Operations"
+ },
+ {
+  "id": "2419",
+  "title": "Xor Pyramid Peak",
+  "cat": "Bitwise Operations"
+ },
+ {
+  "id": "3194",
+  "title": "Xor Pyramid Diagonal",
+  "cat": "Bitwise Operations"
+ },
+ {
+  "id": "3195",
+  "title": "Xor Pyramid Row",
+  "cat": "Bitwise Operations"
+ },
+ {
+  "id": "1654",
+  "title": "SOS Bit Problem",
+  "cat": "Bitwise Operations"
+ },
+ {
+  "id": "3141",
+  "title": "And Subset Count",
+  "cat": "Bitwise Operations"
+ },
+ {
+  "id": "2214",
+  "title": "Inverse Inversions",
+  "cat": "Construction Problems"
+ },
+ {
+  "id": "2215",
+  "title": "Monotone Subsequences",
+  "cat": "Construction Problems"
+ },
+ {
+  "id": "3422",
+  "title": "Third Permutation",
+  "cat": "Construction Problems"
+ },
+ {
+  "id": "3423",
+  "title": "Permutation Prime Sums",
+  "cat": "Construction Problems"
+ },
+ {
+  "id": "1697",
+  "title": "Chess Tournament",
+  "cat": "Construction Problems"
+ },
+ {
+  "id": "3424",
+  "title": "Distinct Sums Grid",
+  "cat": "Construction Problems"
+ },
+ {
+  "id": "2423",
+  "title": "Filling Trominos",
+  "cat": "Construction Problems"
+ },
+ {
+  "id": "2418",
+  "title": "Grid Path Construction",
+  "cat": "Construction Problems"
+ },
+ {
+  "id": "3303",
+  "title": "Nearest Shops",
+  "cat": "Advanced Graph Problems"
+ },
+ {
+  "id": "1134",
+  "title": "Prüfer Code",
+  "cat": "Advanced Graph Problems"
+ },
+ {
+  "id": "1702",
+  "title": "Tree Traversals",
+  "cat": "Advanced Graph Problems"
+ },
+ {
+  "id": "1757",
+  "title": "Course Schedule II",
+  "cat": "Advanced Graph Problems"
+ },
+ {
+  "id": "1756",
+  "title": "Acyclic Graph Edges",
+  "cat": "Advanced Graph Problems"
+ },
+ {
+  "id": "2177",
+  "title": "Strongly Connected Edges",
+  "cat": "Advanced Graph Problems"
+ },
+ {
+  "id": "2179",
+  "title": "Even Outdegree Edges",
+  "cat": "Advanced Graph Problems"
+ },
+ {
+  "id": "1707",
+  "title": "Graph Girth",
+  "cat": "Advanced Graph Problems"
+ },
+ {
+  "id": "3357",
+  "title": "Fixed Length Walk Queries",
+  "cat": "Advanced Graph Problems"
+ },
+ {
+  "id": "3111",
+  "title": "Transfer Speeds Sum",
+  "cat": "Advanced Graph Problems"
+ },
+ {
+  "id": "3407",
+  "title": "MST Edge Check",
+  "cat": "Advanced Graph Problems"
+ },
+ {
+  "id": "3408",
+  "title": "MST Edge Set Check",
+  "cat": "Advanced Graph Problems"
+ },
+ {
+  "id": "3409",
+  "title": "MST Edge Cost",
+  "cat": "Advanced Graph Problems"
+ },
+ {
+  "id": "1677",
+  "title": "Network Breakdown",
+  "cat": "Advanced Graph Problems"
+ },
+ {
+  "id": "3114",
+  "title": "Tree Coin Collecting I",
+  "cat": "Advanced Graph Problems"
+ },
+ {
+  "id": "3149",
+  "title": "Tree Coin Collecting II",
+  "cat": "Advanced Graph Problems"
+ },
+ {
+  "id": "1700",
+  "title": "Tree Isomorphism I",
+  "cat": "Advanced Graph Problems"
+ },
+ {
+  "id": "1701",
+  "title": "Tree Isomorphism II",
+  "cat": "Advanced Graph Problems"
+ },
+ {
+  "id": "1699",
+  "title": "Flight Route Requests",
+  "cat": "Advanced Graph Problems"
+ },
+ {
+  "id": "1703",
+  "title": "Critical Cities",
+  "cat": "Advanced Graph Problems"
+ },
+ {
+  "id": "1203",
+  "title": "Visiting Cities",
+  "cat": "Advanced Graph Problems"
+ },
+ {
+  "id": "3308",
+  "title": "Graph Coloring",
+  "cat": "Advanced Graph Problems"
+ },
+ {
+  "id": "3158",
+  "title": "Bus Companies",
+  "cat": "Advanced Graph Problems"
+ },
+ {
+  "id": "3358",
+  "title": "Split into Two Paths",
+  "cat": "Advanced Graph Problems"
+ },
+ {
+  "id": "1704",
+  "title": "Network Renovation",
+  "cat": "Advanced Graph Problems"
+ },
+ {
+  "id": "1705",
+  "title": "Forbidden Cities",
+  "cat": "Advanced Graph Problems"
+ },
+ {
+  "id": "1752",
+  "title": "Creating Offices",
+  "cat": "Advanced Graph Problems"
+ },
+ {
+  "id": "1685",
+  "title": "New Flight Routes",
+  "cat": "Advanced Graph Problems"
+ },
+ {
+  "id": "3413",
+  "title": "Filled Subgrid Count I",
+  "cat": "Counting Problems"
+ },
+ {
+  "id": "3414",
+  "title": "Filled Subgrid Count II",
+  "cat": "Counting Problems"
+ },
+ {
+  "id": "3415",
+  "title": "All Letter Subgrid Count I",
+  "cat": "Counting Problems"
+ },
+ {
+  "id": "3416",
+  "title": "All Letter Subgrid Count II",
+  "cat": "Counting Problems"
+ },
+ {
+  "id": "3417",
+  "title": "Border Subgrid Count I",
+  "cat": "Counting Problems"
+ },
+ {
+  "id": "3418",
+  "title": "Border Subgrid Count II",
+  "cat": "Counting Problems"
+ },
+ {
+  "id": "3400",
+  "title": "Raab Game II",
+  "cat": "Counting Problems"
+ },
+ {
+  "id": "1080",
+  "title": "Empty String",
+  "cat": "Counting Problems"
+ },
+ {
+  "id": "2229",
+  "title": "Permutation Inversions",
+  "cat": "Counting Problems"
+ },
+ {
+  "id": "2176",
+  "title": "Counting Bishops",
+  "cat": "Counting Problems"
+ },
+ {
+  "id": "2228",
+  "title": "Counting Sequences",
+  "cat": "Counting Problems"
+ },
+ {
+  "id": "1078",
+  "title": "Grid Paths II",
+  "cat": "Counting Problems"
+ },
+ {
+  "id": "1075",
+  "title": "Counting Permutations",
+  "cat": "Counting Problems"
+ },
+ {
+  "id": "2429",
+  "title": "Grid Completion",
+  "cat": "Counting Problems"
+ },
+ {
+  "id": "2421",
+  "title": "Counting Reorders",
+  "cat": "Counting Problems"
+ },
+ {
+  "id": "3232",
+  "title": "Tournament Graph Distribution",
+  "cat": "Counting Problems"
+ },
+ {
+  "id": "3157",
+  "title": "Collecting Numbers Distribution",
+  "cat": "Counting Problems"
+ },
+ {
+  "id": "2415",
+  "title": "Functional Graph Distribution",
+  "cat": "Counting Problems"
+ },
+ {
+  "id": "1087",
+  "title": "Shortest Subsequence",
+  "cat": "Additional Problems I"
+ },
+ {
+  "id": "3150",
+  "title": "Distinct Values Sum",
+  "cat": "Additional Problems I"
+ },
+ {
+  "id": "3190",
+  "title": "Distinct Values Splits",
+  "cat": "Additional Problems I"
+ },
+ {
+  "id": "1670",
+  "title": "Swap Game",
+  "cat": "Additional Problems I"
+ },
+ {
+  "id": "3175",
+  "title": "Beautiful Permutation II",
+  "cat": "Additional Problems I"
+ },
+ {
+  "id": "2422",
+  "title": "Multiplication Table",
+  "cat": "Additional Problems I"
+ },
+ {
+  "id": "3151",
+  "title": "Bubble Sort Rounds I",
+  "cat": "Additional Problems I"
+ },
+ {
+  "id": "3152",
+  "title": "Bubble Sort Rounds II",
+  "cat": "Additional Problems I"
+ },
+ {
+  "id": "3306",
+  "title": "Nearest Campsites I",
+  "cat": "Additional Problems I"
+ },
+ {
+  "id": "3307",
+  "title": "Nearest Campsites II",
+  "cat": "Additional Problems I"
+ },
+ {
+  "id": "1142",
+  "title": "Advertisement",
+  "cat": "Additional Problems I"
+ },
+ {
+  "id": "2186",
+  "title": "Special Substrings",
+  "cat": "Additional Problems I"
+ },
+ {
+  "id": "3169",
+  "title": "Counting LCM Arrays",
+  "cat": "Additional Problems I"
+ },
+ {
+  "id": "3193",
+  "title": "Square Subsets",
+  "cat": "Additional Problems I"
+ },
+ {
+  "id": "3294",
+  "title": "Subarray Sum Constraints",
+  "cat": "Additional Problems I"
+ },
+ {
+  "id": "3213",
+  "title": "Water Containers Moves",
+  "cat": "Additional Problems I"
+ },
+ {
+  "id": "3214",
+  "title": "Water Containers Queries",
+  "cat": "Additional Problems I"
+ },
+ {
+  "id": "2425",
+  "title": "Stack Weights",
+  "cat": "Additional Problems I"
+ },
+ {
+  "id": "3301",
+  "title": "Maximum Average Subarrays",
+  "cat": "Additional Problems I"
+ },
+ {
+  "id": "3302",
+  "title": "Subsets with Fixed Average",
+  "cat": "Additional Problems I"
+ },
+ {
+  "id": "3361",
+  "title": "Two Array Average",
+  "cat": "Additional Problems I"
+ },
+ {
+  "id": "1747",
+  "title": "Pyramid Array",
+  "cat": "Additional Problems I"
+ },
+ {
+  "id": "3404",
+  "title": "Permutation Subsequence",
+  "cat": "Additional Problems I"
+ },
+ {
+  "id": "1188",
+  "title": "Bit Inversions",
+  "cat": "Additional Problems I"
+ },
+ {
+  "id": "1086",
+  "title": "Writing Numbers",
+  "cat": "Additional Problems I"
+ },
+ {
+  "id": "2427",
+  "title": "Letter Pair Move Game",
+  "cat": "Additional Problems I"
+ },
+ {
+  "id": "1147",
+  "title": "Maximum Building I",
+  "cat": "Additional Problems I"
+ },
+ {
+  "id": "1162",
+  "title": "Sorting Methods",
+  "cat": "Additional Problems I"
+ },
+ {
+  "id": "1191",
+  "title": "Cyclic Array",
+  "cat": "Additional Problems I"
+ },
+ {
+  "id": "2414",
+  "title": "List of Sums",
+  "cat": "Additional Problems I"
+ },
+ {
+  "id": "3215",
+  "title": "Bouncing Ball Steps",
+  "cat": "Additional Problems II"
+ },
+ {
+  "id": "3216",
+  "title": "Bouncing Ball Cycle",
+  "cat": "Additional Problems II"
+ },
+ {
+  "id": "3218",
+  "title": "Knight Moves Queries",
+  "cat": "Additional Problems II"
+ },
+ {
+  "id": "3108",
+  "title": "K Subset Sums I",
+  "cat": "Additional Problems II"
+ },
+ {
+  "id": "3109",
+  "title": "K Subset Sums II",
+  "cat": "Additional Problems II"
+ },
+ {
+  "id": "2132",
+  "title": "Increasing Array II",
+  "cat": "Additional Problems II"
+ },
+ {
+  "id": "1189",
+  "title": "Food Division",
+  "cat": "Additional Problems II"
+ },
+ {
+  "id": "1698",
+  "title": "Swap Round Sorting",
+  "cat": "Additional Problems II"
+ },
+ {
+  "id": "2430",
+  "title": "Binary Subsequences",
+  "cat": "Additional Problems II"
+ },
+ {
+  "id": "1706",
+  "title": "School Excursion",
+  "cat": "Additional Problems II"
+ },
+ {
+  "id": "1709",
+  "title": "Coin Grid",
+  "cat": "Additional Problems II"
+ },
+ {
+  "id": "3312",
+  "title": "Grid Coloring II",
+  "cat": "Additional Problems II"
+ },
+ {
+  "id": "2426",
+  "title": "Programmers and Artists",
+  "cat": "Additional Problems II"
+ },
+ {
+  "id": "2174",
+  "title": "Removing Digits II",
+  "cat": "Additional Problems II"
+ },
+ {
+  "id": "2180",
+  "title": "Coin Arrangement",
+  "cat": "Additional Problems II"
+ },
+ {
+  "id": "3159",
+  "title": "Replace with Difference",
+  "cat": "Additional Problems II"
+ },
+ {
+  "id": "2432",
+  "title": "Grid Puzzle I",
+  "cat": "Additional Problems II"
+ },
+ {
+  "id": "2131",
+  "title": "Grid Puzzle II",
+  "cat": "Additional Problems II"
+ },
+ {
+  "id": "2115",
+  "title": "Bit Substrings",
+  "cat": "Additional Problems II"
+ },
+ {
+  "id": "2075",
+  "title": "Reversal Sorting",
+  "cat": "Additional Problems II"
+ },
+ {
+  "id": "1159",
+  "title": "Book Shop II",
+  "cat": "Additional Problems II"
+ },
+ {
+  "id": "3161",
+  "title": "GCD Subsets",
+  "cat": "Additional Problems II"
+ },
+ {
+  "id": "3402",
+  "title": "Minimum Cost Pairs",
+  "cat": "Additional Problems II"
+ },
+ {
+  "id": "3425",
+  "title": "Same Sum Subsets",
+  "cat": "Additional Problems II"
+ },
+ {
+  "id": "1157",
+  "title": "Mex Grid Queries",
+  "cat": "Additional Problems II"
+ },
+ {
+  "id": "1148",
+  "title": "Maximum Building II",
+  "cat": "Additional Problems II"
+ },
+ {
+  "id": "1161",
+  "title": "Stick Divisions",
+  "cat": "Additional Problems II"
+ },
+ {
+  "id": "3401",
+  "title": "Stick Difference",
+  "cat": "Additional Problems II"
+ },
+ {
+  "id": "1665",
+  "title": "Coding Company",
+  "cat": "Additional Problems II"
+ },
+ {
+  "id": "2402",
+  "title": "Two Stacks Sorting",
+  "cat": "Additional Problems II"
+ }
+]

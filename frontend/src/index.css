@@ -1,0 +1,351 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * The two palettes.
+ *
+ * Only these values differ between themes. Every component keeps the same
+ * classes — bg-brand-50 is the page in both, text-ink-900 is the body copy in
+ * both — so a new page is dark-ready without its author doing anything.
+ *
+ * Channels, not hex, because Tailwind composes them as
+ * `rgb(var(--x) / <alpha-value>)`; hex here would break every /40 and /70 in
+ * the app.
+ */
+:root {
+  --brand-50: 255 251 235;
+  --brand-100: 254 243 199;
+  --brand-200: 253 230 138;
+  --brand-300: 252 211 77;
+  --brand-400: 251 191 36;
+  --brand-500: 245 158 11;
+  --brand-600: 234 129 4;
+  --brand-700: 194 96 10;
+  --brand-800: 154 74 15;
+  --brand-900: 124 61 16;
+
+  --ink-500: 122 106 90;
+  --ink-700: 74 58 44;
+  --ink-800: 43 33 24;
+  --ink-900: 26 19 13;
+
+  --surface: 255 255 255;
+  --code: 26 19 13;
+  --code-soft: 43 33 24;
+  --accent-ink: 26 19 13;
+
+  /* The backdrop, so it can be tuned per theme without touching markup. */
+  --grid-line: 154 74 15;
+  --grid-alpha: 0.055;
+  --beam-alpha: 0.55;
+}
+
+[data-theme="dark"] {
+  /*
+   * 50 to 200 are SURFACES and go dark. 300 upwards are ACCENTS and stay
+   * vivid — a border and a button cannot flip the same way and both stay
+   * legible, which is why this scale deliberately is not monotonic.
+   */
+  --brand-50: 21 18 12;
+  --brand-100: 36 30 20;
+  --brand-200: 56 45 30;
+  --brand-300: 232 185 58;
+  --brand-400: 240 169 30;
+  --brand-500: 245 158 11;
+  --brand-600: 251 191 36;
+  --brand-700: 252 211 77;
+  --brand-800: 253 230 138;
+  --brand-900: 254 243 199;
+
+  /* Text, inverted: 900 is the body colour in both themes. */
+  --ink-500: 156 143 125;
+  --ink-700: 197 185 167;
+  --ink-800: 222 212 197;
+  --ink-900: 244 238 227;
+
+  --surface: 29 24 17;
+  /* Unchanged on purpose — see the `code` token in tailwind.config.js. */
+  --code: 15 12 8;
+  --code-soft: 32 26 18;
+  --accent-ink: 26 19 13;
+
+  --grid-line: 253 230 138;
+  --grid-alpha: 0.05;
+  --beam-alpha: 0.06;
+}
+
+@layer base {
+  body {
+    @apply bg-brand-50 font-sans text-ink-900 antialiased;
+  }
+
+  /*
+   * Somebody who has asked their system for less motion gets it.
+   *
+   * The home page's illustrations loop for as long as the page is open, which
+   * is the kind of movement that triggers nausea and migraine for people with
+   * vestibular conditions — and a landing page is the one screen nobody can
+   * avoid. This is deliberately a blunt instrument: everything still works,
+   * the carets simply sit where they are and the bars stay put, because a
+   * decoration is never worth making somebody unwell.
+   *
+   * Left at 0.01ms rather than 0s so animations still FIRE and any
+   * animationend handler runs; a flat `none` can leave a page waiting for an
+   * event that never arrives.
+   */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Headings carry the display tuning by default, so a page does not have to
+     remember to ask for it. */
+  h1, h2, h3 {
+    @apply font-display tracking-tight;
+  }
+}
+
+@layer components {
+  /*
+   * The page backdrop.
+   *
+   * The app was one flat wash of cream from edge to edge, and a single
+   * unbroken colour across a 4000px page reads as unfinished however good the
+   * content sitting on it is. Three layers fix that without ever competing
+   * with the content:
+   *
+   *   oj-grid   a fine rule grid, masked to fade out towards the edges, so
+   *             there is something for the eye to measure the space against.
+   *   oj-beam   a soft diagonal light, the way a window falls across a wall.
+   *   orbs      slow-drifting colour, defined in Spots.jsx.
+   *
+   * All of it is behind the content at -z-10 and pointer-events-none, and the
+   * contrast is deliberately low: a background you NOTICE is a background that
+   * has failed.
+   */
+  .oj-grid {
+    background-image:
+      linear-gradient(to right, rgb(var(--grid-line) / var(--grid-alpha)) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(var(--grid-line) / var(--grid-alpha)) 1px, transparent 1px);
+    background-size: 58px 58px;
+    /*
+     * Masked, not faded with opacity.
+     *
+     * A grid that runs to the edge of the viewport boxes the page in and
+     * makes it feel like a spreadsheet. Fading it out radially leaves texture
+     * where the eye is and nothing where the content ends.
+     */
+    -webkit-mask-image: radial-gradient(ellipse 95% 75% at 50% 25%, #000 25%, transparent 78%);
+    mask-image: radial-gradient(ellipse 95% 75% at 50% 25%, #000 25%, transparent 78%);
+  }
+
+  /*
+   * A patch of dot matrix, as in the reference backgrounds.
+   *
+   * currentColor rather than a fixed value, so a patch can be tinted by the
+   * element that holds it instead of needing a class per colour.
+   */
+  .oj-dots {
+    background-image: radial-gradient(currentColor 1.4px, transparent 1.4px);
+    background-size: 15px 15px;
+  }
+
+  .oj-beam {
+    background: linear-gradient(
+      105deg,
+      transparent 32%,
+      rgb(255 255 255 / var(--beam-alpha)) 45%,
+      rgb(255 255 255 / calc(var(--beam-alpha) * 0.36)) 54%,
+      transparent 66%
+    );
+  }
+
+
+  /*
+   * The code editor does not wrap.
+   *
+   * react-simple-code-editor sets white-space: pre-wrap inline on both the
+   * textarea and the highlighted layer, so a long line folds onto a second
+   * row. That is fatal for a line-number gutter: the numbers count lines in
+   * the file while the folded text takes two rows, and everything below drifts
+   * by one for each wrap. Editors scroll sideways instead, so this does too.
+   *
+   * !important because the library writes these as inline styles, and letting
+   * the container overflow is what allows the outer box to scroll horizontally
+   * rather than clipping the long line.
+   */
+  .oj-editor {
+    overflow: visible !important;
+  }
+
+  .oj-editor > pre,
+  .oj-editor > textarea {
+    white-space: pre !important;
+    overflow-wrap: normal !important;
+    word-break: normal !important;
+  }
+
+  /*
+   * The browser's default focus ring draws a hard blue rectangle around the
+   * whole editing surface, which fights the theme and outlines an area rather
+   * than pointing at anything.
+   *
+   * It is removed here and replaced on the container (see focus-within in
+   * CodeEditor), not simply deleted: something has to show a keyboard user
+   * where they are. The caret alone is easy to lose in a long file.
+   */
+  .oj-editor > textarea:focus,
+  .oj-editor > textarea:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  /*
+   * Syntax colours for the dark theme.
+   *
+   * CodeEditor imports prismjs/themes/prism.css, which is built for a white
+   * page: near-black text, dark blue keywords, dark red strings. The editor's
+   * own background follows the theme, so in dark mode every one of those
+   * became dark-on-dark and the code was genuinely unreadable — the single
+   * worst thing a dark mode could break on a judge.
+   *
+   * Overridden here rather than by importing a second Prism theme, because a
+   * whole theme file would also restyle the background, the selection and the
+   * padding, and those already follow the app's own tokens.
+   *
+   * The palette is the one used in the fake editors elsewhere on the site, so
+   * a real editor and a drawing of one look like the same product.
+   */
+  [data-theme="dark"] .oj-editor,
+  [data-theme="dark"] .oj-editor > pre,
+  [data-theme="dark"] .oj-editor > textarea,
+  [data-theme="dark"] code[class*="language-"],
+  [data-theme="dark"] pre[class*="language-"] {
+    color: #e6dccb;
+    text-shadow: none;
+  }
+
+  [data-theme="dark"] .token.comment,
+  [data-theme="dark"] .token.prolog,
+  [data-theme="dark"] .token.doctype,
+  [data-theme="dark"] .token.cdata {
+    color: #7d7059;
+  }
+
+  [data-theme="dark"] .token.punctuation {
+    color: #b9ab93;
+  }
+
+  [data-theme="dark"] .token.property,
+  [data-theme="dark"] .token.tag,
+  [data-theme="dark"] .token.constant,
+  [data-theme="dark"] .token.symbol,
+  [data-theme="dark"] .token.deleted {
+    color: #f0a3a3;
+  }
+
+  [data-theme="dark"] .token.boolean,
+  [data-theme="dark"] .token.number {
+    color: #d9a441;
+  }
+
+  [data-theme="dark"] .token.selector,
+  [data-theme="dark"] .token.attr-name,
+  [data-theme="dark"] .token.string,
+  [data-theme="dark"] .token.char,
+  [data-theme="dark"] .token.builtin,
+  [data-theme="dark"] .token.inserted {
+    color: #9ed88f;
+  }
+
+  [data-theme="dark"] .token.operator,
+  [data-theme="dark"] .token.entity,
+  [data-theme="dark"] .token.url,
+  [data-theme="dark"] .token.variable {
+    color: #c9bda6;
+    background: none;
+  }
+
+  [data-theme="dark"] .token.atrule,
+  [data-theme="dark"] .token.attr-value,
+  [data-theme="dark"] .token.keyword {
+    color: #fbbf24;
+  }
+
+  [data-theme="dark"] .token.function,
+  [data-theme="dark"] .token.class-name {
+    color: #8fc8f0;
+  }
+
+  [data-theme="dark"] .token.regex,
+  [data-theme="dark"] .token.important {
+    color: #f0b26a;
+  }
+
+  /* The caret, which otherwise stays the light theme's near-black. */
+  [data-theme="dark"] .oj-editor > textarea {
+    caret-color: #fbbf24;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r
+           from-brand-500 to-brand-300 px-5 py-2.5 font-semibold text-accent-ink
+           shadow-sm transition hover:from-brand-600 hover:to-brand-400
+           focus:outline-none focus:ring-2 focus:ring-brand-400 focus:ring-offset-2
+           disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center rounded-lg border border-brand-300
+           px-4 py-2 font-medium text-brand-800 transition hover:bg-brand-100
+           focus:outline-none focus:ring-2 focus:ring-brand-400;
+  }
+
+  .field {
+    @apply w-full rounded-lg border border-brand-200 bg-surface px-4 py-2.5
+           text-ink-900 placeholder-brand-400/70 transition
+           focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-200;
+  }
+
+  .label {
+    @apply mb-1.5 block text-sm font-semibold text-brand-800;
+  }
+
+  .card {
+    @apply rounded-2xl border border-brand-200 bg-surface p-6 shadow-sm;
+  }
+
+  /* The AI analyser is deliberately a different colour from the rest of the
+     app. Everything the judge says is measured; everything here is a language
+     model's opinion, and the two should not look alike. */
+  .btn-ai {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r
+           from-violet-600 to-purple-500 px-5 py-2.5 font-semibold text-white
+           shadow-sm transition hover:from-violet-700 hover:to-purple-600
+           focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-offset-2
+           disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .btn-ai-ghost {
+    @apply inline-flex items-center justify-center rounded-lg border border-violet-300
+           px-4 py-2 font-medium text-violet-800 transition hover:bg-violet-50
+           focus:outline-none focus:ring-2 focus:ring-violet-400
+           disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .card-ai {
+    @apply overflow-hidden rounded-2xl border border-violet-200 bg-surface shadow-sm;
+  }
+
+  .card-ai-header {
+    @apply flex flex-wrap items-center justify-between gap-2 border-b border-violet-200
+           bg-violet-100 px-4 py-2.5 text-sm font-bold text-violet-900;
+  }
+}

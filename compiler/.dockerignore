@@ -1,0 +1,40 @@
+# Anything listed here is invisible to "docker build", which matters for two
+# separate reasons.
+#
+# Secrets: COPY . . would otherwise bake .env into an image layer, where the
+# Mongo URI and the Gemini key stay readable by anyone who pulls the image.
+# The real .env is handed over at run time with --env-file instead.
+#
+# Speed: node_modules is the largest thing in this folder and the image builds
+# its own copy with npm ci anyway. The scratch folders are rebuilt at startup.
+
+node_modules
+npm-debug.log*
+
+.env
+.env.*
+
+codes/
+outputs/
+
+.DS_Store
+*.md
+Dockerfile
+.dockerignore
+
+# Problem content stays out of the image on purpose.
+#
+# The image is the compiler and judge engine. Problems are content: they live in
+# MongoDB now, and their test files live under testdata/. Content changes far
+# more often than the engine does, and a published image holding test data would
+# hand the hidden cases to anyone who pulls it.
+#
+# testdata/ is mounted at run time instead:
+#   -v "$(pwd)/testdata:/app/testdata:ro"
+# Read-only, because submitted code runs in this container and must never be
+# able to rewrite the expected output it is being judged against.
+#
+# problems/ is the old file-based source, kept after the migration as a backup.
+# Nothing reads it any more.
+problems/
+testdata/

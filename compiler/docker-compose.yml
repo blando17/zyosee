@@ -1,0 +1,77 @@
+# The compiler service and the Redis it keeps its AI counters in.
+#
+# Two containers rather than one because they fail differently. Redis holding
+# rate limits should survive the compiler being rebuilt, which happens every
+# time judge code changes; that is the entire point of moving the counters out
+# of the compiler's memory.
+#
+#   docker compose up -d --build     start both
+#   docker compose logs -f compiler  follow the service
+#   docker compose down              stop both, keep the data
+#
+# The npm scripts in package.json wrap these.
+
+services:
+  redis:
+    image: redis:7-alpine
+    # appendonly keeps the counters across a Redis restart too. Without it a
+    # restart of this container would forgive everyone's quota, which is the
+    # bug being fixed one level down.
+    command: redis-server --appendonly yes --save ""
+    volumes:
+      - redis-data:/data
+    # Published so the service can also be run on the host with `npm start`
+    # against the same Redis.
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+
+  compiler:
+    build: .
+    image: oj-compiler:latest
+    container_name: oj-compiler
+    env_file: .env
+    environment:
+      # Overrides whatever .env says, because inside this network Redis is
+      # reachable by service name rather than on localhost.
+      REDIS_URL: redis://redis:6379
+    ports:
+      - "8000:8000"
+    volumes:
+      # Read-only: submitted code runs in this container and must never be able
+      # to rewrite the expected output it is judged against.
+      - ./testdata:/app/testdata:ro
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # Judge workers. Same image as the API because they need the same toolchains,
+  # the same problems from MongoDB and the same test files. One job at a time
+  # each, so the number of compilers that can run at once is the number of
+  # replicas:
+  #
+  #   docker compose up -d --scale worker=3
+  #
+  # No container_name and no ports, because both would stop it scaling past one.
+  worker:
+    build: .
+    image: oj-compiler:latest
+    command: node worker.js
+    env_file: .env
+    environment:
+      REDIS_URL: redis://redis:6379
+    volumes:
+      - ./testdata:/app/testdata:ro
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  redis-data:

@@ -1,0 +1,81 @@
+# Companies that have asked each problem in interviews.
+#
+# One problem per line: "Title - Company, Company, ...". The title must match a
+# problem's stored title exactly; scripts/set-companies.js reports any line that
+# matches nothing rather than guessing, and any problem no line covers.
+#
+# Lines beginning with # are ignored.
+
+Balanced Binary Tree - Amazon, Google, Microsoft, Meta, Apple, Bloomberg, Visa
+Best Time to Buy and Sell Stock - Amazon, Google, Microsoft, Meta, Apple, Bloomberg, Goldman Sachs, BlackRock, Adobe, Atlassian
+Binary Search - Amazon, Google, Microsoft, Meta, Apple, Bloomberg
+Binary Tree Inorder Traversal - Microsoft, Amazon, Google, Meta, Apple, Adobe, Bloomberg, Uber
+Binary Tree Postorder Traversal - Amazon, Google, Microsoft, Meta, Apple, Bloomberg
+Binary Tree Preorder Traversal - Amazon, Google, Microsoft, Meta, Apple, Bloomberg
+Climbing Stairs - Amazon, Google, Meta, Microsoft, Goldman Sachs, Citadel, Bloomberg, Adobe, Apple, J.P. Morgan, Intuit, AMD
+Contains Duplicate - Amazon, Google, Microsoft, Bloomberg, Apple
+Find the First Occurrence in a String - Amazon, Google, Microsoft, Meta, Apple, Bloomberg
+Implement a Queue Using Stacks - Amazon, Google, Microsoft, Meta, Apple
+Implement a Stack Using Queues - Google, Amazon, Microsoft, Meta, Netflix, LinkedIn, Adobe, Samsung
+Intersection of Two Linked Lists - Amazon, Google, Microsoft, Meta, Apple, Bloomberg
+Linked List Cycle - Amazon, Microsoft, Bloomberg, Uber, Goldman Sachs, Walmart Labs, Cisco, Samsung, Yahoo
+Longest Common Prefix - Amazon, Google, Apple, Adobe, Bloomberg, IBM, Visa, Accenture, HCL, SAP
+Maximum Depth of Binary Tree - Amazon, Google, Microsoft, Meta, Apple, Bloomberg, Uber
+Merge Sorted Array - Amazon, Google, Microsoft, Meta, Apple, Bloomberg
+Merge Two Sorted Lists - Amazon, Microsoft, Apple, Adobe, Bloomberg, HPE, Teradata, HubSpot, Wix, Shopee, Huawei, Oracle, Intel, Flipkart
+Missing Number - Amazon, Microsoft, Google, Bloomberg, Apple, Nvidia
+Next Greater Element - Amazon, Google, Microsoft, Meta, Bloomberg, Goldman Sachs, Walmart, Uber
+Number of 1 Bits - Amazon, Microsoft, Apple, Google, Bloomberg, Nvidia
+Palindrome Linked List - Amazon, Google, Microsoft, Meta, Apple, Bloomberg
+Repeated Substring Pattern - Amazon, Google, Microsoft, Meta, Adobe
+Reverse Bits - Amazon, Microsoft, Apple, Google, Bloomberg
+Reverse Linked List - Google, Meta, Apple, Microsoft, Bloomberg, ByteDance, J.P. Morgan, Cisco, Expedia, Accenture, Deloitte, Nvidia
+Same Tree - Amazon, Google, Microsoft, Meta, Apple, Bloomberg
+Single Number - Google, Amazon, Meta, Airbnb, Qualcomm, Palantir, Nvidia, Cisco, Yahoo, Yandex
+Symmetric Tree - Google, Meta, Microsoft, Apple, LinkedIn, Bloomberg, Adobe, Yahoo, Comcast, Yandex
+Two Sum - Amazon, Google, Microsoft, Meta, Apple, Adobe, Bloomberg, Blackstone, Cadence, Comcast, Mastercard, SAP, Infosys, Wipro
+Valid Anagram - Bloomberg, Mastercard, Disney, American Express, Tesla, PayPal, Oracle, Accenture, Infosys, Wipro, Siemens, Cognizant
+Valid Palindrome - Meta, Uber, Spotify, Bank of America, Intel, ServiceNow, Accenture, Infosys, Wipro, SAP, American Express
+Valid Parentheses - Google, Amazon, Meta, Microsoft, Bloomberg, Goldman Sachs, Mastercard, LinkedIn, Intuit, Adobe, Airbnb, BlackRock, J.P. Morgan
+Add Two Numbers - Google, Meta, Amazon, Microsoft, Apple, Bloomberg, Airbnb, Adobe, Oracle, Uber, Nvidia
+Binary Tree Level Order Traversal - Amazon, Google, Meta, Microsoft, Apple, Netflix, Bloomberg
+Clone Graph - Amazon, Google, Meta, Microsoft, Nvidia, Bloomberg, Apple
+Coin Change - Amazon, PayPal, Mastercard, Walmart Labs, Intuit, Pinterest, Salesforce, Netflix, Samsung, Capital One, Accenture
+Combination Sum - Amazon, Google, Microsoft, Meta, Apple, Bloomberg, Goldman Sachs, Adobe
+Container With Most Water - Amazon, Google, Microsoft, Meta, Apple, Bloomberg, Goldman Sachs, Uber
+Course Schedule - Amazon, Meta, Google, Microsoft, TikTok, ByteDance, eBay, VMware, Snowflake, Oracle, Flipkart
+Daily Temperatures - Google, Amazon, Bloomberg, Goldman Sachs, Palantir, Salesforce, Netflix, Intuit, Visa, PhonePe, Flipkart, Accenture
+Find First and Last Position of an Element - Amazon, Google, Microsoft, Meta, Apple, Bloomberg
+Find Peak Element - Amazon, Google, Microsoft, Meta, Apple, Bloomberg
+Group Anagrams - Google, Amazon, Meta, Microsoft, Bloomberg, Goldman Sachs, Citadel, DoorDash, Expedia, Intuit, Adobe, Apple, Atlassian, Cisco, IBM, Infosys, J.P. Morgan, Morgan Stanley, Nvidia
+House Robber - Amazon, Google, Microsoft, Meta, Apple, Bloomberg, Goldman Sachs, Nvidia
+Is Graph Bipartite - Amazon, Google, Meta, Microsoft, Bloomberg, Uber
+Letter Combinations of a Phone Number - Amazon, Google, Microsoft, Meta, Apple, Bloomberg
+Longest Common Subsequence - Amazon, Google, Microsoft, Meta, Apple, Bloomberg, Goldman Sachs
+Longest Increasing Subsequence - Amazon, Google, Microsoft, Meta, Apple, Bloomberg, Nvidia, Visa
+Longest Palindromic Substring - Amazon, Google, Microsoft, Meta, Apple, Bloomberg, Goldman Sachs, Oracle
+Maximum Length of Repeated Subarray - Amazon, Google, Microsoft, Meta, Bloomberg
+Maximum Subarray - Google, Amazon, Meta, Microsoft, Goldman Sachs, Bloomberg, LinkedIn, DE Shaw, J.P. Morgan, Morgan Stanley, Adobe, Apple, Atlassian, Cisco, IBM, Infosys
+Merge Intervals - Google, Amazon, Meta, Microsoft, Bloomberg, Goldman Sachs, Citadel, Databricks, Apple, Adobe, Atlassian, LinkedIn, Dropbox, Airbnb, Capital One, J.P. Morgan, Morgan Stanley, ByteDance, Flipkart, Expedia, Cisco, Disney
+Min Stack - Amazon, Intuit, Paytm, Delhivery, Nike, Snap, Lyft, Vimeo, Yandex, Palo Alto Networks, Salesforce, Walmart Labs, Morgan Stanley, LinkedIn
+Number of Connected Components - Google, Meta, Amazon, Microsoft, Bloomberg, Uber, DoorDash
+Number of Islands - Google, Amazon, Meta, Microsoft, Bloomberg, Goldman Sachs, Citadel, Cloudflare, DoorDash, Dropbox, CrowdStrike, Cisco, Capital One, ByteDance, Flipkart, Expedia, LinkedIn
+Partition Equal Subset Sum - Amazon, Google, Microsoft, Meta, Bloomberg, Visa, Goldman Sachs
+Permutations - Amazon, Google, Microsoft, Meta, Apple, Bloomberg, Goldman Sachs
+Product of Array Except Self - Amazon, Google, Meta, Microsoft, Apple, Bloomberg, Goldman Sachs, Uber
+Remove the Nth Node From the End - Meta, Amazon, Apple, Microsoft, Bloomberg, Adobe, Nvidia, Uber, Qualcomm
+Rotate Image - Amazon, Google, Microsoft, Meta, Apple, Bloomberg, Goldman Sachs
+Rotting Oranges - Amazon, Google, Meta, Microsoft, Apple, Bloomberg, Nvidia, Visa
+Search a 2D Matrix - Amazon, Google, Microsoft, Meta, Apple, Bloomberg
+Search in Rotated Sorted Array - Amazon, Google, Microsoft, Meta, Apple, Bloomberg, Uber
+Search in Rotated Sorted Array II - Amazon, Google, Microsoft, Meta, Apple
+String Compression - Amazon, Google, Microsoft, Meta, Apple, Bloomberg
+Subsets - Amazon, Google, Microsoft, Meta, Apple, Bloomberg, Goldman Sachs
+Subsets II - Amazon, Google, Microsoft, Meta, Bloomberg, Adobe
+Three Sum - Amazon, Google, Microsoft, Meta, Apple, Bloomberg, Goldman Sachs, Adobe
+Unique Paths - Amazon, Google, Microsoft, Meta, Apple, Bloomberg, Goldman Sachs
+Minimum Window Substring - Amazon, Google, Microsoft, Meta, Apple, Bloomberg, Goldman Sachs, Adobe, Uber, Oracle
+N-Queens - Amazon, Google, Microsoft, Meta, Apple, Bloomberg, Goldman Sachs, Adobe, Nvidia
+Reverse Nodes in k-Group - Amazon, Google, Microsoft, Meta, Apple, Bloomberg, Goldman Sachs, Adobe, Uber, Nvidia
+Rotate Array - Amazon, Google, Meta, Microsoft, Apple, Adobe, Bloomberg, Oracle
+Sudoku Solver - Amazon, Google, Microsoft, Meta, Apple, Bloomberg, Goldman Sachs, Adobe, Nvidia
