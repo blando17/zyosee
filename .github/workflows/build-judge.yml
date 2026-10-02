@@ -1,0 +1,114 @@
+# Builds the judge image and pushes it to GHCR.
+#
+# WHY THE IMAGE IS NOT BUILT ON RENDER
+#
+# It was, and it failed twice at exactly 15m49s — the same duration for two
+# different commits, which is a wall rather than an error in the build. The
+# image carries gcc, g++, a headless JDK, Python and 122 MB of test files, and
+# that is more than a free pipeline slot will sit through.
+#
+# Building here instead fixes three things at once. GitHub Actions is free and
+# unmetered for public repositories, so a long build costs nothing; the runner
+# is natively linux/amd64, which is what Render runs and what a Mac cannot
+# produce without slow emulation; and Render stops building altogether — it
+# pulls a finished image, so a deploy is a download rather than a quarter of an
+# hour of compilation, and it no longer spends the workspace's 500 monthly
+# pipeline minutes.
+#
+# ONE-TIME SETUP, both described in deploy/render/README.md:
+#   1. After the first successful run, make the GHCR package PUBLIC. Packages
+#      start private, and a private image needs registry credentials configured
+#      in Render. Public is simpler and the image holds no secrets — the
+#      Dockerfile's scoped .dockerignore keeps every .env out, which is checked
+#      by the guard step below.
+#   2. Add the service's Render deploy hook as the RENDER_DEPLOY_HOOK secret, so
+#      a new image deploys itself. Without it everything still works; you press
+#      Manual Deploy in Render instead.
+
+name: Build judge image
+
+on:
+  push:
+    branches: [main]
+    # Only when something that lands IN the image changes. The frontend and the
+    # accounts API are not in it, and rebuilding 1.5 GB because a README moved
+    # is how a free quota disappears.
+    paths:
+      - "compiler/**"
+      - "deploy/testdata/**"
+      - "deploy/render/Dockerfile.compiler"
+      - "deploy/render/Dockerfile.compiler.dockerignore"
+      - ".github/workflows/build-judge.yml"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/setup-buildx-action@v3
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          # Provided by Actions. No secret to create, and it is scoped to this
+          # repository and expires with the run.
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # ghcr.io rejects an uppercase path, and a GitHub owner may contain
+      # capitals. Lower-casing here rather than hardcoding the owner keeps this
+      # working in a fork.
+      - name: Work out the image name
+        id: img
+        run: echo "name=ghcr.io/$(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')/zyosee-judge" >> "$GITHUB_OUTPUT"
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: deploy/render/Dockerfile.compiler
+          # Render runs amd64. Omitting this on a runner is harmless, but being
+          # explicit is what stops someone later building this on an arm Mac and
+          # shipping an image that dies with "exec format error".
+          platforms: linux/amd64
+          push: true
+          # :latest is what Render pulls. The commit tag is so a bad deploy can
+          # be pinned back to a known-good image by url rather than by rebuild.
+          tags: |
+            ${{ steps.img.outputs.name }}:latest
+            ${{ steps.img.outputs.name }}:${{ github.sha }}
+          # Layer cache between runs. The apt layer with the toolchains is the
+          # expensive one and almost never changes, so later builds are minutes
+          # rather than the quarter hour Render could not finish.
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      # The image is about to be made public, so this is the last place to
+      # notice a secret in it. The Dockerfile's scoped .dockerignore is what
+      # keeps .env out; this proves it held rather than trusting that it did.
+      - name: Refuse to ship an image containing a .env
+        run: |
+          docker pull --quiet "${{ steps.img.outputs.name }}:${{ github.sha }}"
+          found=$(docker run --rm --entrypoint sh "${{ steps.img.outputs.name }}:${{ github.sha }}" \
+            -c 'find / -name ".env" -o -name ".env.*" 2>/dev/null | grep -v sample | head -5' || true)
+          if [ -n "$found" ]; then
+            echo "::error::Secret files found inside the image:"; echo "$found"; exit 1
+          fi
+          echo "No .env files in the image."
+
+      - name: Tell Render there is a new image
+        env:
+          HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
+        run: |
+          if [ -z "$HOOK" ]; then
+            echo "RENDER_DEPLOY_HOOK is not set — press Manual Deploy in Render to pick this up."
+            exit 0
+          fi
+          curl -fsS -X POST "$HOOK" > /dev/null
+          echo "Render deploy triggered."

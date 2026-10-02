@@ -69,13 +69,33 @@ services:
   # ------------------------------------------------------- compiler + judge --
   - type: web
     name: zyosee-judge
-    runtime: docker
+    # A prebuilt image, NOT a Dockerfile build.
+    #
+    # Render built this itself at first and failed twice at exactly 15m49s — the
+    # same duration for two different commits, so a ceiling rather than a fault
+    # in the build. The image carries gcc, g++, a headless JDK, Python and
+    # 122 MB of test files, which is more than a free pipeline slot will finish.
+    #
+    # .github/workflows/build-judge.yml builds it on GitHub Actions instead,
+    # where the runner is natively amd64 and the minutes are free for a public
+    # repository, and pushes it here. Render now pulls a finished image: deploys
+    # take a download instead of a quarter of an hour, and the workspace's 500
+    # monthly pipeline minutes stop being spent on this at all.
+    #
+    # The Dockerfile has not gone anywhere — deploy/render/Dockerfile.compiler
+    # is what that workflow builds, and it is still the way to build this by
+    # hand or for a different host.
+    runtime: image
     plan: free
     region: oregon
-    dockerfilePath: ./deploy/render/Dockerfile.compiler
-    # The repository root, because the image needs compiler/ and
-    # deploy/testdata/ and they are siblings.
-    dockerContext: .
+    image:
+      # Must be lower-case, and the GHCR package must be public — otherwise add
+      # a registry credential in Render and reference it with `creds`.
+      url: ghcr.io/blando17/zyosee-judge:latest
+    # Nothing in a git push changes this image, so a push must not redeploy it.
+    # The workflow's deploy hook is what says "there is a new image", and it
+    # fires only after one has actually been built and pushed.
+    autoDeploy: false
     healthCheckPath: /
     envVars:
       - key: NODE_ENV
