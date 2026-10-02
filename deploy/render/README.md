@@ -55,11 +55,17 @@ Render dashboard → **New → Blueprint** → pick this repo. It reads
 The judge builds a Debian image with three toolchains, so the first build takes
 **15–25 minutes**. Later ones reuse cached layers.
 
-Then set the two values marked `sync: false`, **on both** `zyosee-api` and
-`zyosee-judge`:
+Then set the values marked `sync: false`:
 
-- `MONGODB_URI` — your Atlas string
-- `CLIENT_URL` — leave it for now, you fill it in at step 5
+| Variable | On | Value |
+|---|---|---|
+| `MONGODB_URI` | both services | your Atlas string |
+| `CLIENT_URL` | both services | leave blank, filled in at step 5 |
+| `COMPILER_URL` | `zyosee-api` only | the judge's **public** URL, e.g. `https://zyosee-judge.onrender.com` |
+
+`COMPILER_URL` is optional and only admin problem authoring uses it. It must be
+the public URL, not an internal hostname: free services cannot receive private
+network traffic from each other.
 
 `JWT_SECRET_KEY` is generated once on the API and pulled into the judge
 automatically. Do not set it by hand on only one of them: mismatched secrets
@@ -110,20 +116,55 @@ Open Pair Lab in two tabs to confirm the WebSocket upgrade works over `wss://`.
 
 ## What free actually costs you
 
-**Services sleep after about 15 minutes idle.** The next visitor waits roughly
-30–60 seconds while the container starts. For a link on a résumé this is the one
-that stings: a recruiter may see a blank page and leave. Nothing in the free
-plan fixes it — only upgrading one service does. (Pinging yourself to stay awake
-burns the same monthly instance hours and is explicitly against the spirit of
-the plan; you also run out of hours before the month does.)
+All of this is from Render's own documentation, checked rather than remembered.
 
-The frontend is on Vercel precisely to limit the damage: the page itself always
-loads instantly, and only the first API call waits.
+**750 instance hours per workspace per month — shared.** This is the limit that
+bites, and it is easy to misread. It is per *workspace*, not per service, and
+this blueprint has **two** web services. A month is about 730 hours, so two
+services running continuously would want ~1,460 and you would be suspended
+until the next month.
+
+What saves you is the thing that also annoys you: a spun-down service consumes
+no hours. A portfolio site that is idle most of the day stays well inside the
+budget. A site you keep awake by pinging it does not — that burns hours twice as
+fast as wall-clock and runs out around day fifteen. There is no configuration
+that fixes this; only moving one service to a paid plan does.
+
+**Spin-down after 15 minutes idle, about a minute to come back.** WebSocket
+messages count as traffic, so an open Pair Lab session keeps the API awake.
+The frontend is on Vercel precisely to limit the blast radius: the page always
+paints instantly and only the first API call waits.
+
+While a service is spun down, Render answers `/robots.txt` with `Disallow: /`
+on its behalf. Harmless here, but it means the API is never indexed.
+
+**Free Key Value is in-memory only.** It does not persist to disk, so a restart
+loses everything in it — and Render may restart a free instance whenever it
+likes. For us that means queued-but-not-yet-judged submissions can vanish on a
+restart, and the person sees a job that never finishes. Submitting again works.
+Worth knowing it is a real failure mode and not something the code can fix:
+`BRPOP` is at-most-once to begin with.
+
+Only **one** free Key Value instance is allowed per workspace, so this blueprint
+uses your one.
 
 **512 MB of RAM**, shared by the API, the forked worker, and whatever g++ is
-compiling. Hence `JUDGE_WORKERS=1` and `PROBLEM_CACHE_BYTES=32MB` in the
-blueprint — both are deliberate, and raising either risks an OOM kill that takes
-the site down rather than just the submission.
+compiling. Hence `JUDGE_WORKERS=1` and `PROBLEM_CACHE_BYTES=32MB`. Both are
+deliberate; raising either risks an OOM that takes the service down rather than
+just the submission.
+
+**The private network is one-way.** A free service may send private requests to
+a data store — that is how the judge reaches Key Value — but may not *receive*
+private traffic from another service. This is why `COMPILER_URL` is the judge's
+public URL rather than an internal hostname.
+
+**No shell access on free.** No SSH, no dashboard shell. When something misbehaves
+you have logs and the `/` endpoint, nothing else. Reproduce locally with
+`docker build -f deploy/render/Dockerfile.compiler .` instead.
+
+**Atlas access counts as service-initiated traffic**, which Render says it may
+suspend a free service for if the volume is "uncommonly high". Normal use is
+nowhere near it; a runaway polling loop would be.
 
 **No per-submission resource limits.** On EC2, compose sets `mem_limit`,
 `pids_limit` and `cpus` per container, so a fork bomb hurts only its own
@@ -142,4 +183,7 @@ deployment with a known audience; not something to point a crowd at.
 | Server selection timeout | Atlas allowlist. Step 2. |
 | Pair Lab and duels never connect | `VITE_AUTH_URL` is relative or missing `https://`, so the socket URL is not `wss://`. Fix and **redeploy** — Vite bakes it in at build time. |
 | Judge reports `"mode":"inline"` | `REDIS_URL` is unset or the Key Value service is down. Submissions still work. |
+| A submission never finishes | Free Key Value restarted and lost the queue. Submit again. |
+| "Could not reach the compiler service" when saving a problem | `COMPILER_URL` unset on the API. Set it to the judge's **public** URL — the private network does not work in that direction on free. |
+| All services suspended mid-month | 750 shared instance hours exhausted. They reset on the 1st. |
 | First request takes a minute | Cold start. Expected. |
