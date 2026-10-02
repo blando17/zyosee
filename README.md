@@ -65,6 +65,21 @@ This separation prevents CPU-heavy or potentially unsafe submitted programs from
 | 🔄 Redis Fallback | In-memory fallback when Redis is unavailable |
 
 ---
+---
+
+## 🌐 Deployment
+
+| Environment | Status | Link |
+|-------------|--------|------|
+| 🧪 Prototype | 🟢 Live | [ZY0SEE Prototype](https://zyosee.vercel.app/) |
+| ☁️ Production | 🔄 Planned | AWS Deployment |
+
+> **Note:** The currently available version is a prototype deployed on Vercel. 
+> The production-ready platform will be deployed on **AWS** with scalable infrastructure
+> for the API, compiler/execution service, database, caching, and other platform services.
+
+---
+
 
 # 🏗️ Architecture
 
