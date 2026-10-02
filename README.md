@@ -21,37 +21,7 @@
 
 ---
 
-## 📖 Table of Contents
 
-- [About](#-about)
-- [Features](#-features)
-- [Architecture](#-architecture)
-- [Project Structure](#-project-structure)
-- [Tech Stack](#-tech-stack)
-- [Getting Started](#-getting-started)
-- [Authentication](#-authentication)
-- [Online Compiler](#-online-compiler)
-- [Online Judge](#-online-judge)
-- [Submission Queue](#-submission-queue)
-- [Judge Workers](#-judge-workers)
-- [Docker Execution](#-docker-execution)
-- [Problem Management](#-problem-management)
-- [Test Generation](#-test-generation)
-- [Redis](#-redis)
-- [AI Features](#-ai-features)
-- [Pair Lab](#-pair-lab)
-- [Duel Arena](#-duel-arena)
-- [Progress Tracking](#-progress-tracking)
-- [Security](#-security)
-- [Failure Handling](#-failure-handling)
-- [Scalability](#-scalability)
-- [API Reference](#-api-reference)
-- [Limitations](#-current-limitations)
-- [Roadmap](#-roadmap)
-- [Development Commands](#-development-commands)
-- [Design Principles](#-design-principles)
-
----
 
 # 🎯 About
 
