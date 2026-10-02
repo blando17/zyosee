@@ -12,7 +12,7 @@ automatic HTTPS, `git push` deploys, and no instance to administer.
 |---|---|---|
 | React frontend | Vercel | Static files. A CDN serves them free and **never sleeps**, so the site always paints instantly. |
 | Accounts API + WebSockets | Render web service | Needs a long-lived process. Render supports WebSocket upgrades on free. |
-| Compiler + judge + worker | Render web service (Docker) | Needs g++, a JDK and python3 in the image. |
+| Compiler + judge + worker | Render web service, **prebuilt image** | Needs g++, a JDK and python3. Built by GitHub Actions, not Render — see step 1. |
 | Redis | Render Key Value | The submission queue. |
 | MongoDB | Atlas M0 | Unchanged from every other deployment. |
 
@@ -27,18 +27,46 @@ There is a loop in the configuration: Render needs the Vercel URL to allow it
 through CORS, and Vercel needs the Render URLs compiled into its bundle. Neither
 exists at the start. Do it in this order and you go round the loop once.
 
-### 1 — Commit the test data
+### 1 — Push, and let Actions build the image
 
-Render builds from the repository, so the tests must be in it. `.gitignore` has
-already been changed to allow this, with the trade written out in the file.
+The judge is **not** built by Render. Render tried and failed twice at exactly
+15m49s — the same duration for two different commits, so a ceiling rather than a
+fault in the build. The image carries gcc, g++, a headless JDK, Python and
+122 MB of test files, and that is more than a free pipeline slot will sit
+through.
+
+[`.github/workflows/build-judge.yml`](../../.github/workflows/build-judge.yml)
+builds it on GitHub Actions instead — free and unmetered for a public repo,
+natively amd64, with a layer cache that makes later builds minutes rather than
+a quarter of an hour — and pushes it to GHCR.
+
+The test files still have to be in the repository for that workflow to copy
+them. `.gitignore` has already been changed to allow it, with the trade written
+out in the file.
 
 ```bash
 git add -A && git commit -m "Add Render and Vercel deployment configuration"
 ```
 
-That stages about 2,350 files and 122 MB. Push it.
+Push it, then watch the **Actions** tab. The first run takes 15–20 minutes
+because nothing is cached yet.
 
-### 2 — Atlas network access
+### 2 — Make the GHCR package public
+
+Once the workflow succeeds, the package appears under your GitHub profile →
+**Packages → zyosee-judge**. It is **private by default, and Render cannot pull
+a private image without credentials.**
+
+Package settings → **Change visibility → Public**.
+
+Nothing in the image is secret: the Dockerfile's scoped `.dockerignore` keeps
+every `.env` out, and the workflow has a step that opens the built image and
+fails the run if it finds one, so this is checked rather than assumed.
+
+If you would rather keep it private, add a registry credential in Render and
+reference it from `render.yaml` with `image.creds.fromRegistryCreds`.
+
+### 3 — Atlas network access
 
 **Render's free plan has no static outbound IP**, so the allowlist has to be
 `0.0.0.0/0`. The database user's password becomes the only thing guarding it —
@@ -47,20 +75,23 @@ generate a long random one and do not reuse it.
 Skipping this produces a server-selection timeout that reads like a broken app
 rather than a firewall.
 
-### 3 — Apply the blueprint
+### 4 — Apply the blueprint
 
 Render dashboard → **New → Blueprint** → pick this repo. It reads
 [`render.yaml`](../../render.yaml) and creates all three services.
 
-The judge builds a Debian image with three toolchains, so the first build takes
-**15–25 minutes**. Later ones reuse cached layers.
+The judge pulls the image Actions built in step 1, so it comes up in under a
+minute instead of building. The API is a plain Node service and installs in
+about one.
+
+If the judge fails with a pull error, the package is still private — step 2.
 
 Then set the values marked `sync: false`:
 
 | Variable | On | Value |
 |---|---|---|
 | `MONGODB_URI` | both services | your Atlas string |
-| `CLIENT_URL` | both services | leave blank, filled in at step 5 |
+| `CLIENT_URL` | both services | leave blank, filled in at step 6 |
 | `COMPILER_URL` | `zyosee-api` only | the judge's **public** URL, e.g. `https://zyosee-judge.onrender.com` |
 
 `COMPILER_URL` is optional and only admin problem authoring uses it. It must be
@@ -73,12 +104,12 @@ give you a site where logging in works and every submission returns 401.
 
 Note the two URLs Render assigns, e.g. `https://zyosee-api.onrender.com`.
 
-### 4 — Vercel
+### 5 — Vercel
 
 New project → this repo → **Root Directory: `frontend`**. Vite is detected
 automatically.
 
-Add the two build-time variables from step 3, absolute and with no trailing
+Add the two build-time variables from step 4, absolute and with no trailing
 slash — see [../../frontend/VERCEL.md](../../frontend/VERCEL.md) for why the
 scheme in particular is load-bearing for WebSockets:
 
@@ -89,7 +120,7 @@ scheme in particular is load-bearing for WebSockets:
 
 Deploy. Note the Vercel URL.
 
-### 5 — Close the loop
+### 6 — Close the loop
 
 Back on Render, set `CLIENT_URL` on **both** services to the Vercel URL. Both
 restart on their own.
@@ -97,6 +128,17 @@ restart on their own.
 This is the step people skip. Without it every request from the browser fails
 CORS, and the browser reports it as a network error, which sends you looking for
 a server that is actually running perfectly.
+
+### 7 — Let new images deploy themselves
+
+Render service → **Settings → Deploy Hook**, copy the URL, and add it to GitHub
+as a repository secret named `RENDER_DEPLOY_HOOK`
+(**Settings → Secrets and variables → Actions**).
+
+From then on, a change under `compiler/` or `deploy/testdata/` rebuilds the
+image and deploys it on its own. Skip this and everything still works — you
+press **Manual Deploy** in Render after a build instead, and the workflow says
+so in its log rather than failing.
 
 ## Check it
 
@@ -177,7 +219,10 @@ deployment with a known audience; not something to point a crowd at.
 
 | Symptom | Cause |
 |---|---|
-| Build fails on `COPY deploy/testdata/` | Test data was not committed. See step 1. |
+| Actions build fails on `COPY deploy/testdata/` | Test data was not committed. See step 1. |
+| Render deploy fails pulling the image | The GHCR package is still private. See step 2. |
+| A new image does not deploy | `RENDER_DEPLOY_HOOK` not set, or `autoDeploy: false` doing its job. Press Manual Deploy, or see step 7. |
+| Actions fails at "Refuse to ship an image containing a .env" | Exactly what it says — a secret reached the image. Do not make the package public; fix the ignore rules first. |
 | Login works, submissions 401 | `JWT_SECRET_KEY` differs between the two services. Delete the override on the judge and let `fromService` supply it. |
 | Browser shows network errors on every call | `CLIENT_URL` not set to the Vercel URL. Step 5. |
 | Server selection timeout | Atlas allowlist. Step 2. |
