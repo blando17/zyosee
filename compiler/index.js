@@ -112,6 +112,30 @@ function requireAuth(req, res, next) {
   }
 }
 
+/*
+ * A liveness check that touches nothing.
+ *
+ * "/" below is a status page: it counts problems, asks Redis for the queue
+ * depth, and reports whether the AI key works. That makes it a fine thing for a
+ * human to open and a bad thing for a platform to poll, because it answers only
+ * as fast as its slowest dependency — and if one of them never answers, neither
+ * does it.
+ *
+ * That is not hypothetical. A malformed MONGODB_URI left this service with the
+ * port bound and every request to "/" hanging on a driver that would never
+ * resolve. Render's port scan saw silence, concluded there was no HTTP server
+ * at all, and failed the deploy eighteen minutes later with "no open HTTP ports
+ * detected" — which points at networking, when the fault was one wrong
+ * environment variable.
+ *
+ * So the health check gets its own route that proves exactly one thing: this
+ * process is up and serving. Whether its dependencies are healthy is a question
+ * for "/", where a slow answer is informative rather than fatal.
+ */
+app.get("/healthz", (req, res) => {
+  res.json({ status: "ok", service: "online-judge-compiler" });
+});
+
 app.get("/", async (req, res) => {
   res.json({
     service: "online-judge-compiler",
