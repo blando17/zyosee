@@ -1,0 +1,38 @@
+# Build-context rules for Dockerfile.compiler ONLY.
+#
+# BuildKit looks for "<path to Dockerfile>.dockerignore" before falling back to
+# "<context>/.dockerignore". This file exists to make one targeted exception to
+# the root rules: deploy/testdata must reach THIS image, because Render has no
+# volume to mount it from. Everything else stays excluded, including — most
+# importantly — the .env files.
+#
+# If a builder ever ignores this convention and falls back to the root file, the
+# COPY of deploy/testdata fails and the build stops with "file not found". That
+# is the correct failure: a judge silently shipped without its test cases would
+# report every submission as an internal error instead.
+
+# Secrets. Never relax these. Handed over as environment variables at run time.
+**/.env
+**/.env.*
+!**/.env.sample
+
+# Rebuilt inside the image by npm ci; the host's copies are also compiled for
+# the wrong architecture.
+**/node_modules
+
+# Nothing below is needed to compile or judge.
+frontend
+backend
+scripts
+csnotes
+cses_problems
+compiler/testdata
+compiler/problems
+compiler/codes
+compiler/outputs
+.git
+.claude
+**/*.md
+**/.DS_Store
+**/*.log
+**/*.bak

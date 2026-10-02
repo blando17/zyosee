@@ -1,0 +1,70 @@
+# The compiler and judge, as one self-contained image.
+#
+# HOW THIS DIFFERS FROM compiler/Dockerfile, AND WHY IT HAS TO
+#
+# The EC2 image treats test data as content and mounts it at run time:
+#
+#     -v "$(pwd)/testdata:/app/testdata:ro"
+#
+# That is the better arrangement when you own the machine. Content changes far
+# more often than the engine, the image stays small, and the hidden cases never
+# enter a layer that someone could pull.
+#
+# Render has no volumes on the free plan and no persistent disk, so there is
+# nowhere to mount from: whatever the judge needs at run time has to be in the
+# image at build time. Hence the COPY below, and hence the matching
+# Dockerfile.compiler.dockerignore beside this file, which re-admits the
+# testdata that the repository-root .dockerignore excludes.
+#
+# This is a smaller concession than it looks. The image is built by Render from
+# a private build and is never published to a registry, so "anyone who pulls the
+# image" is nobody. The test files do have to be committed to the repository for
+# Render to see them at all, and THAT is the real exposure — see
+# deploy/render/README.md, which says so plainly rather than burying it.
+#
+# Build context is the REPOSITORY ROOT, because this image needs two directories
+# that are siblings: compiler/ and deploy/testdata/.
+FROM node:22-bookworm-slim
+
+# Same four toolchains as the EC2 image, for the same reason: this service runs
+# other people's C, C++, Python and Java, and a plain node image carries none of
+# them. Debian over Alpine so <bits/stdc++.h> and a headless JDK behave.
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        build-essential \
+        python3 \
+        default-jdk-headless \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Dependencies before source, so editing judge.js does not reinstall npm.
+COPY compiler/package.json compiler/package-lock.json ./
+RUN npm ci --omit=dev
+
+COPY compiler/ ./
+
+# The test files. Read by testStore.js through TESTDATA_DIR, which render.yaml
+# points at this path.
+COPY deploy/testdata/ ./testdata/
+
+# Scratch space, created while root still owns /app.
+RUN mkdir -p codes outputs && chown -R node:node codes outputs
+
+# Submitted programs inherit this identity. Root in a container is still root
+# over everything the container can touch.
+#
+# Note what this does NOT buy us here. On EC2 the compose file also sets
+# mem_limit, pids_limit and cpus, so a submission that forks endlessly or
+# allocates endlessly hurts only its own container. On Render the service IS the
+# container and there is no second layer to absorb that, so a fork bomb takes
+# the website down with it until the platform restarts it. The judge's own
+# wall-clock timeout is the only thing standing in front of that.
+USER node
+
+# Render injects PORT and routes to it. index.js already prefers it.
+ENV PORT=8000
+EXPOSE 8000
+
+# Not index.js: start-service.js runs the API here and forks the judge workers
+# beside it, because Render's free plan has no background worker service.
+CMD ["node", "start-service.js"]

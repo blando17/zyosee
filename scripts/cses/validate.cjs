@@ -297,17 +297,20 @@ async function main() {
      * arithmetic only balances if each of the 4,917 provided pairs was either
      * written as a test or counted as one the import chose not to take.
      */
-    let sourcePairs = 0, accountedFor = 0, accountedSkipped = 0, accountedDropped = 0;
+    let sourcePairs = 0, accountedFor = 0, accountedSkipped = 0, accountedDropped = 0, accountedLarge = 0;
     for (const s of scanned.values()) sourcePairs += s.pairs.length;
     for (const doc of imported) {
       accountedFor += doc.metadata?.importedProvidedTests || 0;
       accountedSkipped += doc.metadata?.skippedEmptyPairs || 0;
       accountedDropped += doc.metadata?.droppedAsDuplicateOfSample || 0;
+      // Only non-zero on a size-capped import, for a deployment that cannot
+      // carry the full set.
+      accountedLarge += doc.metadata?.skippedTooLarge || 0;
     }
-    if (accountedFor + accountedSkipped + accountedDropped !== sourcePairs) {
+    if (accountedFor + accountedSkipped + accountedDropped + accountedLarge !== sourcePairs) {
       fail.push(
         `source pairs ${sourcePairs} != imported ${accountedFor} + skipped ${accountedSkipped} + ` +
-          `dropped as duplicate ${accountedDropped}`
+          `dropped as duplicate ${accountedDropped} + over the size cap ${accountedLarge}`
       );
     }
 
@@ -349,6 +352,7 @@ async function main() {
     console.log(`  imported as hidden tests:   ${pad(accountedFor)}`);
     console.log(`  skipped, no usable data:    ${pad(accountedSkipped)}`);
     console.log(`  dropped, same as a sample:  ${pad(accountedDropped)}`);
+    if (accountedLarge) console.log(`  dropped, over the size cap:  ${pad(accountedLarge)}`);
     if (DEEP) {
       console.log(`Tests compared with source:   ${pad(deepChecked)}`);
       console.log(`Tests differing from source:  ${pad(deepMismatch)}`);

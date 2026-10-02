@@ -127,6 +127,24 @@ const MAX_OUTPUT_LIMIT = 64 * 1024 * 1024;
 const SLUG_RE = /^[a-z0-9][a-z0-9-]{0,63}$/;
 
 /*
+ * An optional ceiling on a single test's size, for deployments that cannot
+ * carry 4.6 GB.
+ *
+ * Unset, nothing is dropped and the import is exactly as before. Set, any pair
+ * whose input plus expected output exceeds it is left out — of the files AND of
+ * the manifest, which is the part that matters: the judge works from the
+ * manifest, so a file missing from disk but listed in Mongo is a broken
+ * problem, not a smaller one.
+ *
+ * At 1 MB this keeps 79% of the tests in 261 MB, a 17x reduction, and every
+ * problem still has tests. What it costs is the large stress cases, which are
+ * precisely the ones that separate a fast solution from a slow one — so a
+ * capped deployment accepts some solutions the full judge would reject on time.
+ * That is a real trade and it belongs in the deployment notes, not hidden here.
+ */
+const MAX_TEST_BYTES = Number(process.env.MAX_TEST_BYTES) || 0;
+
+/*
  * The official category, as a tag.
  *
  * Lower-cased, because that is the vocabulary the existing problems already
@@ -303,9 +321,15 @@ function buildProblem(scanned, officialEntry) {
    */
   const usable = [];
   let skippedEmpty = 0;
+  let skippedTooLarge = 0;
   for (const pair of scanned.pairs) {
     if (statementSource !== "provided folder" || interactive) { skippedEmpty += 1; continue; }
-    if (fs.statSync(pair.input).size === 0) { skippedEmpty += 1; continue; }
+    const inBytes = fs.statSync(pair.input).size;
+    if (inBytes === 0) { skippedEmpty += 1; continue; }
+    if (MAX_TEST_BYTES && inBytes + fs.statSync(pair.expected).size > MAX_TEST_BYTES) {
+      skippedTooLarge += 1;
+      continue;
+    }
     usable.push(pair);
   }
 
@@ -328,7 +352,7 @@ function buildProblem(scanned, officialEntry) {
   const multipleAnswers = /any of them|any of these|any one of them|print any|any valid|several solutions/i.test(prose);
 
   return {
-    scanned, officialEntry, parsed, slug, difficulty, usable, skippedEmpty,
+    scanned, officialEntry, parsed, slug, difficulty, usable, skippedEmpty, skippedTooLarge,
     interactive, multipleAnswers, statementSource, notes,
     number: NUMBER_BASE + number,
   };
@@ -505,6 +529,9 @@ function documentFor(built, manifest, largestExpected) {
       // Provided cases dropped because the statement's example already covers
       // them byte for byte; the sample is kept instead.
       droppedAsDuplicateOfSample: built.droppedAsDuplicate || 0,
+      // Only meaningful when MAX_TEST_BYTES was set; 0 on a full import.
+      skippedTooLarge: built.skippedTooLarge,
+      maxTestBytes: MAX_TEST_BYTES || null,
       sampleTests: parsed.examples.length,
       interactive: built.interactive,
       multipleAnswers: built.multipleAnswers,
