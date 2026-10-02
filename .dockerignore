@@ -1,0 +1,40 @@
+# What must never reach an image layer.
+#
+# The backend and frontend images build from the REPOSITORY ROOT, because they
+# copy backend/ and frontend/ respectively. That makes this file load-bearing in
+# a way the per-service ones are not: without it, COPY backend/ ./ would bake
+# backend/.env — the Atlas URI and the JWT secret — into a layer that stays
+# readable by anyone who can pull or export the image. Deleting the file in a
+# later layer would not help; layers keep their history.
+#
+# Secrets are handed over at RUN time with env_file instead, which keeps them
+# out of the image entirely.
+**/.env
+**/.env.*
+!**/.env.sample
+
+# Built by npm ci inside the image; copying the host's would also drag in
+# binaries compiled for the wrong architecture.
+**/node_modules
+
+# Build output, rebuilt inside the image.
+frontend/dist
+
+# Content, not engine. 4.6 GB that belongs on a mounted volume, and test data
+# in an image would hand the hidden cases to anyone who pulls it.
+compiler/testdata
+compiler/problems
+deploy/testdata
+cses_problems
+
+# Source material and notes, not code.
+csnotes
+*.md
+!README.md
+
+.git
+.gitignore
+.DS_Store
+*.log
+*.bak
+.claude

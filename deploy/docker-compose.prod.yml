@@ -1,0 +1,123 @@
+# ZYOSEE in production, on one t3.micro.
+#
+# THE WHOLE FILE IS SHAPED BY 1 GB OF RAM
+#
+# Five containers share 1 GB with the operating system. Every limit below is
+# chosen against that budget rather than copied from a template:
+#
+#   redis      64m   a queue and some counters; it holds almost nothing
+#   backend   180m   Express and the Mongo driver, no code execution
+#   compiler  200m   validates and enqueues. It only JUDGES when Redis is
+#                    down, which is the rare path, so it does not need the
+#                    big allowance
+#   worker    450m   the one that actually compiles and runs submissions, so
+#                    it gets the largest share
+#   frontend   32m   nginx serving static files
+#   ----------------
+#              926m, plus the OS. The host needs swap; see the deploy notes.
+#
+# These limits are not only about fitting. A submission that allocates until
+# something dies should kill its own container and nothing else — without
+# mem_limit the kernel picks a victim, and it may well pick the database
+# driver or sshd rather than the runaway program.
+#
+#   docker compose -f deploy/docker-compose.prod.yml up -d --build
+#
+# Build contexts below are relative to THIS FILE, not to the working directory,
+# so the command works from anywhere in the repository.
+
+services:
+  redis:
+    image: redis:7-alpine
+    command: redis-server --appendonly yes --save "" --maxmemory 48mb --maxmemory-policy noeviction
+    volumes:
+      - redis-data:/data
+    mem_limit: 64m
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile.backend
+    env_file: .env
+    environment:
+      PORT: 5001
+      # Read-write: authoring a problem writes test files, and the accounts
+      # API is the only service that may.
+      TESTDATA_DIR: /app/testdata
+    volumes:
+      - ./testdata:/app/testdata
+    mem_limit: 180m
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  compiler:
+    build:
+      # The compiler's own folder, not the repository root: its .dockerignore
+      # and its COPY paths are both written against this context.
+      context: ../compiler
+      dockerfile: Dockerfile
+    env_file: .env
+    environment:
+      PORT: 8000
+      REDIS_URL: redis://redis:6379
+    volumes:
+      # Read-only, so submitted code cannot overwrite the expected answers it
+      # is judged against.
+      - ./testdata:/app/testdata:ro
+    mem_limit: 200m
+    # The gaps that did not matter on a laptop and do on a shared 1 GB box.
+    pids_limit: 128
+    restart: unless-stopped
+    depends_on:
+      redis:
+        condition: service_healthy
+
+  worker:
+    build:
+      context: ../compiler
+      dockerfile: Dockerfile
+    command: node worker.js
+    env_file: .env
+    environment:
+      REDIS_URL: redis://redis:6379
+    volumes:
+      - ./testdata:/app/testdata:ro
+    # The one that runs other people's code, so it carries the real caps.
+    mem_limit: 450m
+    pids_limit: 128
+    cpus: 0.8
+    restart: unless-stopped
+    depends_on:
+      redis:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile.frontend
+      args:
+        # Fixed into the bundle at build time. Change the address and the
+        # frontend image must be rebuilt — which is why the deployment uses an
+        # Elastic IP rather than whatever the instance is given on boot.
+        VITE_AUTH_URL: ${PUBLIC_URL}/auth
+        VITE_COMPILER_URL: ${PUBLIC_URL}/judge
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx-upgrade.conf:/etc/nginx/conf.d/upgrade.conf:ro
+    mem_limit: 32m
+    depends_on:
+      - backend
+      - compiler
+    restart: unless-stopped
+
+volumes:
+  redis-data:
