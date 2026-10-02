@@ -31,7 +31,6 @@ compiler/problems
 compiler/codes
 compiler/outputs
 .git
-.claude
 **/*.md
 **/.DS_Store
 **/*.log
