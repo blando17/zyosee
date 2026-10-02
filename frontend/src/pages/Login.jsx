@@ -39,7 +39,18 @@ export default function Login() {
     <main className="mx-auto max-w-md px-6 py-16">
       <div className="card">
         <h1 className="text-2xl font-bold text-ink-900">Welcome back</h1>
-        <p className="mt-1 text-sm text-ink-800">Log in to open the compiler.</p>
+        {/*
+          Not "log in to open the compiler", which this used to say.
+
+          Two things were wrong with it. It undersold the account — signing in
+          opens Pair Lab, the Duel Arena, Core CS and your progress, and the
+          compiler is the smallest of them. And it read as an instruction to
+          somebody who had already decided to sign in and was looking at the
+          form, which is a sentence doing no work.
+
+          Three beats, echoing the headline on the home page.
+        */}
+        <p className="mt-1 text-sm text-ink-800">Problems to solve, friends to duel, code to run.</p>
 
         <form onSubmit={handleSubmit} className="mt-6 space-y-4">
           <div>
