@@ -1,0 +1,135 @@
+# Render Blueprint — the API, the judge, and a Redis for the queue.
+#
+# The frontend is NOT here. It is a static Vite build with no server side at
+# all, so it goes to Vercel, which serves it from a CDN for free and does not
+# sleep. Putting it on Render instead would mean a third service that idles out
+# and makes the whole site look dead for a minute when somebody arrives.
+#
+# Apply with: Render dashboard -> New -> Blueprint -> point at this repo.
+#
+# WHAT YOU MUST SET BY HAND AFTERWARDS (marked `sync: false` below)
+#
+#   MONGODB_URI   on both services — the Atlas string, a secret, so it is
+#                 deliberately not written down in a file that is in Git
+#   CLIENT_URL    on both services — your Vercel URL, which does not exist yet
+#                 when you first apply this
+#
+# And in Atlas: Network Access must allow Render. Render's free plan has no
+# static outbound IP, so this has to be 0.0.0.0/0 — which is why the database
+# user's password is the only thing protecting it and should be a long random
+# one, not reused from anywhere.
+
+services:
+  # ---------------------------------------------------------------- accounts --
+  - type: web
+    name: zyosee-api
+    runtime: node
+    plan: free
+    region: oregon
+    rootDir: backend
+    buildCommand: npm ci
+    startCommand: node index.js
+    # GET / returns {"service":"online-judge-accounts","status":"ok"} without
+    # touching Mongo, so a database hiccup does not get the service restarted.
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DB_NAME
+        value: zyosee_prod
+      # Generated once, then shared with the judge below via fromService. Both
+      # services verify the same tokens, so these MUST match; generating one on
+      # each would mean every login worked and every submission 401'd.
+      - key: JWT_SECRET_KEY
+        generateValue: true
+      - key: MONGODB_URI
+        sync: false
+      - key: CLIENT_URL
+        sync: false
+      # The judge's PUBLIC URL, e.g. https://zyosee-judge.onrender.com
+      #
+      # Deliberately not an internal hostname, and not fromService. Render's
+      # private network is one-way on the free plan: a free service may SEND
+      # private requests to a data store, which is how the judge reaches Redis
+      # below, but may not RECEIVE private traffic from another service. So the
+      # API cannot call the judge at http://zyosee-judge:8000 the way it does in
+      # docker-compose. It has to go over the public internet.
+      #
+      # That is safe here: /internal/run-reference requires a service token
+      # signed with JWT_SECRET_KEY and scoped to that one route, so exposing it
+      # publicly does not expose code execution to anyone without the secret.
+      #
+      # Optional. Only admin problem authoring uses it — it runs a reference
+      # solution to produce expected output. Leave it unset and everything a
+      # visitor does still works; that one admin screen fails with a clear
+      # "could not reach the compiler service" instead.
+      - key: COMPILER_URL
+        sync: false
+
+  # ------------------------------------------------------- compiler + judge --
+  - type: web
+    name: zyosee-judge
+    runtime: docker
+    plan: free
+    region: oregon
+    dockerfilePath: ./deploy/render/Dockerfile.compiler
+    # The repository root, because the image needs compiler/ and
+    # deploy/testdata/ and they are siblings.
+    dockerContext: .
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DB_NAME
+        value: zyosee_prod
+      - key: JWT_SECRET_KEY
+        fromService:
+          name: zyosee-api
+          type: web
+          envVarKey: JWT_SECRET_KEY
+      - key: MONGODB_URI
+        sync: false
+      - key: CLIENT_URL
+        sync: false
+      # Where Dockerfile.compiler put the test files.
+      - key: TESTDATA_DIR
+        value: /app/testdata
+      - key: REDIS_URL
+        fromService:
+          name: zyosee-redis
+          type: keyvalue
+          property: connectionString
+      # One worker, forked beside the API by start-service.js.
+      #
+      # Not more. Each judged submission spawns a real compiler — g++ on a
+      # competitive-programming template regularly wants 100 MB+ — and this plan
+      # has 512 MB for the API, the worker, and whatever is being compiled. Two
+      # workers would mean two simultaneous g++ processes and an OOM kill that
+      # takes the website down, not just the submission.
+      - key: JUDGE_WORKERS
+        value: "1"
+      # The default is 256 MB, which is half this instance.
+      #
+      # That default was chosen for a machine judging 473 problems where keeping
+      # statements hot mattered. There are 73 now and the cache holds statements,
+      # not test files — those are read from disk per run — so 32 MB holds the
+      # entire set several times over and leaves the memory to the compiler,
+      # which is the thing that actually needs it.
+      - key: PROBLEM_CACHE_BYTES
+        value: "33554432"
+
+  # -------------------------------------------------------------- the queue --
+  #
+  # Optional, and the app is built to notice. If this service is unavailable,
+  # queue.isAvailable() returns false and index.js judges inline on the request
+  # thread instead — slower under load, but correct, and it fails soft rather
+  # than swallowing submissions.
+  #
+  # Worth keeping: it is what makes the queue architecture real rather than
+  # something that only ever ran on your laptop.
+  - type: keyvalue
+    name: zyosee-redis
+    plan: free
+    region: oregon
+    # Reachable only from the services above, never from the internet.
+    ipAllowList: []
