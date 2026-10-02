@@ -65,6 +65,22 @@ services:
       # "could not reach the compiler service" instead.
       - key: COMPILER_URL
         sync: false
+      # Who may author problems, as a comma-separated list of e-mail addresses.
+      #
+      # There is no role to grant and no flag in the database: you sign up like
+      # anyone else, and you are an administrator if the address on your account
+      # appears here. Leave it unset and nobody is — which the API says in those
+      # words rather than returning a bare 403.
+      #
+      # sync: false because this is the one setting whose value is a decision
+      # about people rather than about infrastructure, and it does not belong in
+      # a file that anybody can read in the repository.
+      #
+      # Read deploy/render/README.md before authoring on this deployment: the
+      # API writes test files to its own disk and the judge reads them from
+      # ITS own disk, and on Render those are two different machines.
+      - key: ADMIN_EMAILS
+        sync: false
 
   # ------------------------------------------------------- compiler + judge --
   - type: web
@@ -96,7 +112,15 @@ services:
     # The workflow's deploy hook is what says "there is a new image", and it
     # fires only after one has actually been built and pushed.
     autoDeploy: false
-    healthCheckPath: /
+    # /healthz, not /.
+    #
+    # "/" counts problems and asks Redis for the queue depth, so it answers only
+    # as fast as its slowest dependency. A malformed MONGODB_URI once left this
+    # service listening but never replying, and Render reported "no open HTTP
+    # ports detected" eighteen minutes later — an answer that points at
+    # networking when the fault was one environment variable. /healthz touches
+    # nothing and fails in seconds when the process is genuinely down.
+    healthCheckPath: /healthz
     envVars:
       - key: NODE_ENV
         value: production
